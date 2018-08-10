@@ -1,3 +1,3 @@
 test('should fail', () => {
-  expect(false).toBeFalsy();
+  expect(process.env.NODE_ENV).toEqual('test');
 });
