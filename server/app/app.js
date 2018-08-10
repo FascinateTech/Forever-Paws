@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
 // const util = require('./utils/utils');
-const config = process.env.NODE_ENV === 'production' ? process.env : require('../../config/config');
+const config = process.env.NODE_ENV === 'test' ? process.env : require('../../config/config');
 
 const app = express();
 
