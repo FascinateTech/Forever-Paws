@@ -23,8 +23,7 @@ export default LandingPage;
 import React, {Component} from 'react';
 import styled from 'styled-components';
 
-import PetProfile from './components/PetProfile.jsx';
-import UserProfile from './components/UserProfile.jsx';
+import PetProfile from './PetProfile';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -111,7 +110,6 @@ class LandingPage extends Component {
   
     return (
       <div>
-        <UserProfile />
         <h2>Doggie Swipe {date.toLocaleTimeString()}.</h2>
         <PetProfile profileQueue={currentProfileView}/>
         <button type='submit' style={this.tempStyleDELETE} onClick={this.nextPet}>
