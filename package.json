@@ -47,7 +47,8 @@
     "styled-navbar-component": "^2.0.0",
     "styled-system": "^3.0.2",
     "typeorm": "^0.2.7",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "react-spring": "^5.6.6"
   },
   "devDependencies": {
     "@types/node": "^8.0.29",
