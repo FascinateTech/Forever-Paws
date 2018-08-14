@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import styled from 'styled-components';
 
 /* eslint react/prop-types:0 */
@@ -27,3 +28,13 @@ function Profile({ props }) {
 }
 
 export default Profile;
+=======
+
+function Profile(props) {
+    return(
+        <h3> description </h3>
+    )
+}
+
+export default Profile;
+>>>>>>> progress css

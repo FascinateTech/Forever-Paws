@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -22,8 +23,14 @@ export default LandingPage;
 =======
 import React, {Component} from 'react';
 import styled from 'styled-components';
+=======
+import React, {Component} from 'react'
+import styled from 'styled-components'
+>>>>>>> progress css
 
-import PetProfile from './PetProfile';
+
+import NavBar from './NavBar'
+import CardStack from './CardStack';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -35,7 +42,7 @@ class LandingPage extends Component {
           breed: 'golden corgie',
           age: '3 years old',
           description: 'Lets skip the small talk and go for a walk',
-          picture: ['https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg'],
+          picture: ['https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg','https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg','https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg','https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg'],
           location: '20057',
         }, 
         {
@@ -78,11 +85,6 @@ class LandingPage extends Component {
 
     this.nextPet = this.nextPet.bind(this);
 
-    this.tempStyleDELETE = {
-      margin: '5px',
-      border: '1px solid red'
-    };
-
   }
 
   componentDidMount() {
@@ -109,17 +111,17 @@ class LandingPage extends Component {
   border: 2px solid palevioletred;`;
   
     return (
-      <div>
-        <h2>Doggie Swipe {date.toLocaleTimeString()}.</h2>
-        <PetProfile profileQueue={currentProfileView}/>
-        <button type='submit' style={this.tempStyleDELETE} onClick={this.nextPet}>
-          Like
-        </button>
-        <Button> hi </ Button>
-        <button type='submit' style={this.tempStyleDELETE} onClick={this.nextPet}>
-          {`Don't Like`}
-        </button>
-      </div>
+        <div>
+          <NavBar />
+          <h2>Doggie Swipe {date.toLocaleTimeString()}.</h2>
+          <CardStack profileQueue={currentProfileView}/>
+          <Button type='submit' onClick={this.nextPet}>
+            {`Don't Like`}
+          </Button>
+          <Button type='submit' onClick={this.nextPet}>
+            Like
+          </Button>
+        </div>
     );
   }
 }
