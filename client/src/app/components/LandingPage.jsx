@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -28,9 +29,13 @@ import React, {Component} from 'react'
 import styled from 'styled-components'
 >>>>>>> progress css
 
+=======
+import React, {Fragment, Component} from 'react'
+>>>>>>> ed edits
 
 import NavBar from './NavBar'
 import CardStack from './CardStack';
+import BottomLaunchPad from './BottomLaunchpad';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -42,7 +47,7 @@ class LandingPage extends Component {
           breed: 'golden corgie',
           age: '3 years old',
           description: 'Lets skip the small talk and go for a walk',
-          picture: ['https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg','https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg','https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg','https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg'],
+          picture: ['https://i.ytimg.com/vi/SfLV8hD7zX4/maxresdefault.jpg'],
           location: '20057',
         }, 
         {
@@ -103,25 +108,12 @@ class LandingPage extends Component {
   render() {
   const {date, currentProfileView} = this.state;
 
-  const Button = styled.button` border-radius: 3px;
-  padding: 0.25em 1em;
-  margin: 0 1em;
-  background: transparent;
-  color: palevioletred;
-  border: 2px solid palevioletred;`;
-  
     return (
-        <div>
+        <Fragment>
           <NavBar />
-          <h2>Doggie Swipe {date.toLocaleTimeString()}.</h2>
           <CardStack profileQueue={currentProfileView}/>
-          <Button type='submit' onClick={this.nextPet}>
-            {`Don't Like`}
-          </Button>
-          <Button type='submit' onClick={this.nextPet}>
-            Like
-          </Button>
-        </div>
+          <BottomLaunchPad nextPet ={this.nextPet}/>
+        </Fragment>
     );
   }
 }

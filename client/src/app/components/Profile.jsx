@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 <<<<<<< HEAD
 import styled from 'styled-components';
@@ -29,11 +30,30 @@ function Profile({ props }) {
 
 export default Profile;
 =======
+=======
+import React, {Fragment} from 'react';
+import styled from 'styled-components';
 
-function Profile(props) {
+
+function Profile({props}) {
+    
+    const ProfileStyle = styled.div`
+    background: gray;
+    border-radius: 3px;
+    margin: .5em;
+    padding: 0.25em 1em;
+    color: palevioletred;
+    border: 2px solid palevioletred;`;
+>>>>>>> ed edits
+
     return(
-        <h3> description </h3>
-    )
+        <ProfileStyle>
+            <h1>{props.name}, {props.age}</h1>
+            <h4>{props.breed} </h4>
+            <h5> Location: {props.location}</h5>
+            <h5>{props.description} </h5>
+        </ProfileStyle>
+    );
 }
 
 export default Profile;
