@@ -106,7 +106,7 @@ class LandingPage extends Component {
 
 
   render() {
-  const {date, currentProfileView} = this.state;
+  const {currentProfileView} = this.state;
 
     return (
         <Fragment>

@@ -42,27 +42,33 @@ import Profile from './Profile'
 function CardStack({profileQueue}) {
     
     const CardStyle = styled.div`
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    flex-direction: column;
+    align-items: stretch;
     border-radius: 15px;
-    margin: .5em 0em .5em 0em;
-    background: transparent;
+    margin: 100px 0em 100px 0em;
+    background: lightblue;
     color: palevioletred;
     border: 2px solid palevioletred;`;
     
     
-    const imgDiv = styled.div`
+    const ImgDiv = styled.div`
     position: relative;
     `
     const Img = styled.img`
     width: 100%;
     height: auto;
+    display: flex;
     `
     
 >>>>>>> ed edits
     return (
         <CardStyle>
-            <imgDiv>
+            <ImgDiv>
                 <Img alt="dog" src={profileQueue.picture} />
-            </imgDiv>
+            </ImgDiv>
         <Profile props = {profileQueue}/>
         </CardStyle>
     );  
