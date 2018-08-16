@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/FacinateTech/Forever-Paws#readme",
   "dependencies": {
+    "@types/node": "^10.5.8",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
@@ -39,10 +40,14 @@
     "react-dom": "^16.4.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "reflect-metadata": "^0.1.10",
+    "styled-components": "^3.4.2",
+    "styled-container-component": "^2.0.0",
+    "styled-nav-component": "^2.0.0",
+    "styled-navbar-component": "^2.0.0",
+    "styled-system": "^3.0.2",
     "typeorm": "^0.2.7",
-    "webpack-node-externals": "^1.7.2",
-    "@types/node": "^10.5.8",
-    "reflect-metadata": "^0.1.10"
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",

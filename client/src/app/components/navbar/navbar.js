@@ -18,10 +18,11 @@ const NavComponent = () => (
           <span>&#9776;</span>
         </NavbarLink>
         <NavbarLink light href="/">
-          <img src="./pawLogo.svg" alt="paw" />
+          Forever Paws
+          {/* <img src="./pawLogo.svg" alt="paw" /> */}
         </NavbarLink>
-        <NavbarLink light href="#">
-          Link
+        <NavbarLink light href="userProfile">
+          Your Profile
         </NavbarLink>
       </Nav>
     </Navbar>
