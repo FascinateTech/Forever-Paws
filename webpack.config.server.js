@@ -36,9 +36,4 @@ module.exports = {
   },
   externals: nodeExternals(),
   devtool: 'source-map',
-  plugins: [
-    new DefinePlugin({
-      'process.env': JSON.stringify(process.env),
-    }),
-  ],
 };
