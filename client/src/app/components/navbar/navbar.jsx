@@ -3,6 +3,7 @@ import React from 'react';
 import { Container } from 'styled-container-component';
 import { Navbar, NavbarLink } from 'styled-navbar-component';
 import { Nav } from 'styled-nav-component';
+import { Link } from 'react-router-dom';
 
 // const Nav = styled.a`
 //   position: fixed;
@@ -14,16 +15,17 @@ const NavComponent = () => (
   <Container fluid>
     <Navbar expandSm light>
       <Nav justified>
-        <NavbarLink>
-          <span>&#9776;</span>
-        </NavbarLink>
-        <NavbarLink light href="/">
-          Forever Paws
-          {/* <img src="./pawLogo.svg" alt="paw" /> */}
-        </NavbarLink>
-        <NavbarLink light href="userProfile">
-          Your Profile
-        </NavbarLink>
+        <Link to="/settings">
+          <NavbarLink>
+            <span>&#9776;</span>
+          </NavbarLink>
+        </Link>
+        <Link to="/">
+          <NavbarLink light>Forever Paws</NavbarLink>
+        </Link>
+        <Link to="/userProfile">
+          <NavbarLink light>Your Profile</NavbarLink>
+        </Link>
       </Nav>
     </Navbar>
   </Container>
