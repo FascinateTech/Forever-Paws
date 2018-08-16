@@ -11,7 +11,7 @@
     "react-dev": "webpack -d --watch --optimize-minimize --optimize-occurrence-order --optimize-dedupe --config webpack.config.js",
     "server-dev": "webpack -d --watch --optimize-minimize --optimize-occurrence-order --optimize-dedupe --config webpack.config.server.js",
     "start-db": "ts-node src/index.ts",
-    "heroku-postbuild": "webpack -p --progress --optimize-minimize --optimize-occurrence-order --optimize-dedupe--config webpack.config.js && webpack -p --progress --optimize-minimize --optimize-occurrence-order --optimize-dedupe --config webpack.config.server.js",
+    "heroku-postbuild": "webpack -p --progress --optimize-minimize --optimize-occurrence-order --optimize-dedupe --config webpack.config.js && webpack -p --progress --optimize-minimize --optimize-occurrence-order --optimize-dedupe --config webpack.config.server.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "prepush": "npm run lint && npm test"
