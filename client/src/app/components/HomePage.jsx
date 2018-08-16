@@ -23,7 +23,6 @@ class HomePage extends Component {
 
   async componentDidMount() {
     const Console = console;
-    Console.log(process.env);
     try {
       const { data } = await axios.get('/api/animals');
       this.setState({
