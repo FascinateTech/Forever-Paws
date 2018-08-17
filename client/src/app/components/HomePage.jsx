@@ -68,7 +68,7 @@ class HomePage extends Component {
     return (
       <div>
         <NavComponent />
-        <CardStack profileQueue={currentProfileView} />
+        <CardStack profileQueue={currentProfileView} nextPet={this.nextPet}/>
         <BottomLaunchPad nextPet={this.nextPet} />
       </div>
     );
