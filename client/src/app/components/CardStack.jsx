@@ -34,7 +34,10 @@ const Img = styled.img`
       this.handleMouseDown = this.handleMouseDown.bind(this)
       this.handleMouseMoveRaf = this.handleMouseMoveRaf.bind(this)
       this.handleMouseMove = this.handleMouseMove.bind(this)
+
+      
     }
+
 
     onUp (e) {this.isDragging = false};
 
@@ -82,10 +85,10 @@ const Img = styled.img`
         //     nextPet();
         //   }
         // }
-        handleTouchStart (e) {this.handleMouseDown(e.touches[0])}
-        
-        handleTouchMove (e) {this.handleMouseMove(e.touches[0])}
-        
+        handleTouchStart (e) {
+          console.log("HI",e);
+          this.handleMouseDown(e.touches[0])}
+
         handleMouseUp(){
           window.removeEventListener('touchmove', this.handleTouchMove)
           window.removeEventListener('touchend', this.handleMouseUp)
@@ -96,6 +99,7 @@ const Img = styled.img`
         }
         
         handleMouseDown({ pageX, pageY }){
+          console.log("pee",{ pageX, pageY })
           window.addEventListener('touchmove', this.handleTouchMove)
           window.addEventListener('touchend', this.handleMouseUp)
           window.addEventListener('mousemove', this.handleMouseMoveRaf)
