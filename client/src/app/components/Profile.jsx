@@ -13,29 +13,23 @@ const ProfileStyle = styled.div`
   border: 2px solid palevioletred;
 `;
 
-@withGesture
 class Profile extends Component {
-    constructor(props) {
+    constructor({props}) {
         super(props);
         this.state = {
-            
         };
     }
     
-
-    
     render() {
-        const { name, age, breed, location, description } = this.props;
-        const { down, x, y, xDelta, yDelta, xInitial, yInitial  } = this.props
-
+        const { name, age, breed, location, description } = this.props.props;
         return (
             <ProfileStyle>
                 <h1>
-                    Temp Styke {name}, {age}
+                    {name}, {age}
                 </h1>
-                <h4>{breed} Temp Styke</h4>
-                <h5> Location: {location} 6969</h5>
-                <h5>{description} Temp Styke</h5>
+                <h4>{breed} </h4>
+                <h5> Location: {location} </h5>
+                <h5>{description} </h5>
             </ProfileStyle>
         );
     }

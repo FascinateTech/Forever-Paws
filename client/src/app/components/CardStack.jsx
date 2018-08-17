@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import styled from 'styled-components';
-import { withGesture, Gesture } from 'react-with-gesture'
 
 import Profile from './Profile';
 /* eslint react/prop-types:0 */
@@ -19,42 +18,133 @@ const ImgDiv = styled.div`
 const Img = styled.img`
   width: 100%;
   height: auto;
-`;
-
-@withGesture
-class CardStack extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+  `;
+  
+  // @withGesture
+  class CardStack extends Component {
+    constructor({onUp, onDown, onMove}) {
+      super({onUp, onDown, onMove});
+      this.state = {
+        x: 0, y: 0, xDelta: 0, yDelta: 0, xInitial: 0, yInitial: 0, xPrev: 0, yPrev: 0, down: false 
+      }
+      this.onUp = onUp;
+      this.onDown = onDown;
+      this.onMove = onMove;
+      this.handleMouseUp = this.handleMouseUp.bind(this)
+      this.handleMouseDown = this.handleMouseDown.bind(this)
+      this.handleMouseMoveRaf = this.handleMouseMoveRaf.bind(this)
+      this.handleMouseMove = this.handleMouseMove.bind(this)
     }
 
-  }
-  handleMouseMove(){
-    const {xDelta} = this.props;
+    onUp (e) {this.isDragging = false};
 
-    if(xDelta>60) {
-      nextPet();
-    }
-  }
+    onDown (event) {
+      this.isDragging = true;
+      event.target.setPointerCapture(event.pointerId);
+  
+      // We store the initial coordinates to be able to calculate the changes
+      // later on.
+      this.extractPositionDelta(event);
+    };
+    
+    onMove(event) {
+      if (!this.isDragging) {
+        return;
+      }
+      const {left, top} = this.extractPositionDelta(event);
+  
+      this.setState(({circleLeft, circleTop}) => ({
+        circleLeft: circleLeft + left,
+        circleTop: circleTop + top,
+      }));
+    };
+    
+    extractPositionDelta (event) {
+      const left = event.pageX;
+      const top = event.pageY;
+      const delta = {
+        left: left - this.previousLeft,
+        top: top - this.previousTop,
+      };
+      this.previousLeft = left;
+      this.previousTop = top;
+      return delta;
+    };
 
-  render() {
-    const { down, x, y, xDelta, yDelta, xInitial, yInitial  } = this.props
-    const { nextPet } = this.props;
 
 
+
+
+      // handleMouseMove(){
+        //   const {xDelta} = this.props;
+        
+      //   if(xDelta>60) {
+        //     nextPet();
+        //   }
+        // }
+        handleTouchStart (e) {this.handleMouseDown(e.touches[0])}
+        
+        handleTouchMove (e) {this.handleMouseMove(e.touches[0])}
+        
+        handleMouseUp(){
+          window.removeEventListener('touchmove', this.handleTouchMove)
+          window.removeEventListener('touchend', this.handleMouseUp)
+          window.removeEventListener('mousemove', this.handleMouseMoveRaf)
+          window.removeEventListener('mouseup', this.handleMouseUp)
+          const newProps = { ...this.state, down: false }
+          this.setState(this.onUp ? this.onUp(newProps) : newProps)
+        }
+        
+        handleMouseDown({ pageX, pageY }){
+          window.addEventListener('touchmove', this.handleTouchMove)
+          window.addEventListener('touchend', this.handleMouseUp)
+          window.addEventListener('mousemove', this.handleMouseMoveRaf)
+          window.addEventListener('mouseup', this.handleMouseUp)
+          const newProps = { ...this.state, x: pageX, y: pageY, xDelta: 0, yDelta: 0, xInitial: pageX, yInitial: pageY, xPrev: pageX, yPrev: pageY, down: true }
+          this.setState(this.onDown ? this.onDown(newProps) : newProps)
+        }
+        
+        handleMouseMoveRaf({ pageX, pageY }){
+          if(!this.busy){
+            requestAnimationFrame(() => this.handleMouseMove({ pageX, pageY }))
+            this.busy = true
+          }
+        }
+
+        handleMouseMove({ pageX, pageY }){
+          const newProps = { ...this.state, x: pageX, y: pageY, xDelta: pageX - this.state.xInitial, yDelta: pageY - this.state.yInitial, xPrev: this.state.x, yPrev: this.state.y, xVelocity: pageX - this.state.x, yVelocity: pageY - this.state.y }
+          this.setState(this.onMove ? this.onMove(newProps) : newProps, () => (this.busy = false))
+        }
+        
+        consoleMe(e) {
+          console.log(e)
+        }
+
+    render() {
+          // const { down, x, y, xDelta, yDelta, xInitial, yInitial  } = this.props
+          const { style, className, ...props } = this.props
+          
     return (
-      <Fragment>
-        <CardStyle style={{  
-                'background': 'black',
-                'transform': `translate3d(${xDelta}px,${yDelta}px,0px)`,
-                }}>
+      <div 
+          onMouseDown={this.handleMouseDown}
+          onTouchStart={this.handleTouchStart}
+          
+          onPointerDown={this.onDown}
+          onPointerMove={this.onMove}
+          onPointerUp={this.onUp}
+          onPointerCancel={this.onUp}
+          onGotPointerCapture={this.onGotCapture}
+          onLostPointerCapture={this.onLostCapture}
+          
+          
+          >
+        <CardStyle >
             <ImgDiv>
               <Img alt="dog" src={this.props.profileQueue.picture} />
             </ImgDiv>
             <Profile props={this.props.profileQueue} />
-  
         </CardStyle>
-      </Fragment>
+      </div>
     );
   }
 }
@@ -64,3 +154,9 @@ class CardStack extends Component {
 //   };
 
 export default CardStack;
+
+
+// style={{  
+//   'background': 'black',
+//   'transform': `translate3d(${xDelta}px,${yDelta}px,0px)`,
+//   }}
