@@ -30,16 +30,29 @@ const Img = styled.img`
       this.onUp = onUp;
       this.onDown = onDown;
       this.onMove = onMove;
+
+      this.handleTouchStart = this.handleTouchStart.bind(this)
+      this.handleTouchMove = this.handleTouchMove.bind(this)
+
       this.handleMouseUp = this.handleMouseUp.bind(this)
       this.handleMouseDown = this.handleMouseDown.bind(this)
       this.handleMouseMoveRaf = this.handleMouseMoveRaf.bind(this)
       this.handleMouseMove = this.handleMouseMove.bind(this)
+  
+      this.onGotCapture = this.onGotCapture.bind(this)
+      this.onLostCapture = this.onLostCapture.bind(this)
 
-      
+      this.onRelease = this.onRelease.bind(this)
+
     }
 
 
     onUp (e) {this.isDragging = false};
+
+    onGotCapture (event) {this.setState({hasCapture: true})};
+
+    onLostCapture(event)
+      {this.setState({hasCapture: false})};
 
     onDown (event) {
       this.isDragging = true;
@@ -86,8 +99,9 @@ const Img = styled.img`
         //   }
         // }
         handleTouchStart (e) {
-          console.log("HI",e);
           this.handleMouseDown(e.touches[0])}
+        
+          handleTouchMove (e) {this.handleMouseMove(e.touches[0])}
 
         handleMouseUp(){
           window.removeEventListener('touchmove', this.handleTouchMove)
@@ -99,7 +113,6 @@ const Img = styled.img`
         }
         
         handleMouseDown({ pageX, pageY }){
-          console.log("pee",{ pageX, pageY })
           window.addEventListener('touchmove', this.handleTouchMove)
           window.addEventListener('touchend', this.handleMouseUp)
           window.addEventListener('mousemove', this.handleMouseMoveRaf)
@@ -121,13 +134,27 @@ const Img = styled.img`
         }
         
         consoleMe(e) {
-          console.log(e)
+          console.log("dedede",e.touches[0])
         }
 
-    render() {
-          // const { down, x, y, xDelta, yDelta, xInitial, yInitial  } = this.props
+        componentWillMount(){
+          window.addEventListener('touchend', this.onRelease)
+        }
+        
+        onRelease(){
+          if(this.state.down) {
+            console.log("HELLO",this.state.down)}
+            this.setState({
+              xDelta:0,
+              yDelta:0
+            })
+          }
+        
+        render() {
+          const { down, x, y, xDelta, yDelta, xInitial, yInitial  } = this.state
           const { style, className, ...props } = this.props
           
+
     return (
       <div 
           onMouseDown={this.handleMouseDown}
@@ -139,10 +166,11 @@ const Img = styled.img`
           onPointerCancel={this.onUp}
           onGotPointerCapture={this.onGotCapture}
           onLostPointerCapture={this.onLostCapture}
-          
-          
           >
-        <CardStyle >
+        <CardStyle style={{  
+        'background': 'black',
+        'transform': `translate3d(${xDelta}px,${yDelta}px,0px)`,
+        }}>
             <ImgDiv>
               <Img alt="dog" src={this.props.profileQueue.picture} />
             </ImgDiv>
@@ -160,7 +188,3 @@ const Img = styled.img`
 export default CardStack;
 
 
-// style={{  
-//   'background': 'black',
-//   'transform': `translate3d(${xDelta}px,${yDelta}px,0px)`,
-//   }}
