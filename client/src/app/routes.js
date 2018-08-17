@@ -17,15 +17,8 @@ export default [
     exact: true,
   },
   {
-<<<<<<< HEAD
     path: '/pets',
     component: HomePage,
     exact: true,
   },
-=======
-    path:'/profile',
-    component: Profile,
-    exact: true,
-  }
->>>>>>> progress css
 ];

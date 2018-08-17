@@ -1,59 +1,48 @@
-<<<<<<< HEAD
-import React from 'react';
-<<<<<<< HEAD
+import React, {Fragment, Component} from 'react';
 import styled from 'styled-components';
+import { withGesture, Gesture } from 'react-with-gesture'
+import { Spring, animated } from 'react-spring'
 
 /* eslint react/prop-types:0 */
 
 function Profile({ props }) {
-  const ProfileStyle = styled.div`
-    background: lightpink;
-    border-radius: 3px;
-    margin: 0.5em;
-    padding: 0.25em 1em;
-    color: palevioletred;
-    border: 2px solid palevioletred;
-  `;
-
-  const { name, age, breed, location, description } = props;
-  return (
-    <ProfileStyle>
-      <h1>
-        {name}, {age}
-      </h1>
-      <h4>{breed} </h4>
-      <h5> Location: {location}</h5>
-      <h5>{description} </h5>
-    </ProfileStyle>
-  );
-}
-
-export default Profile;
-=======
-=======
-import React, {Fragment} from 'react';
-import styled from 'styled-components';
-
-
-function Profile({props}) {
-    
     const ProfileStyle = styled.div`
-    background: gray;
-    border-radius: 15px;
-    margin: .5em;
-    color: palevioletred;
-    border: 2px solid palevioletred;`;
->>>>>>> ed edits
+      background: lightpink;
+      border-radius: 3px;
+      margin: 0.5em;
+      padding: 0.25em 1em;
+      color: palevioletred;
+      border: 2px solid palevioletred;
+    `;
+  
+    const { name, age, breed, location, description } = props;
+    
+    return (
+            <ProfileStyle>
+                <Gesture props = {props}>
+                {({ down, x, y, xDelta, yDelta, xInitial, yInitial }) =>
+                <div>
+                    <div>Drag me! coordinates: {x}, {y}</div>
 
-    return(
-        <ProfileStyle>
-            <h1>{props.name}, {props.age}</h1>
-            <h4>{props.breed} </h4>
-            <h5> Location: {props.location}</h5>
-            <h5>{props.description} </h5>
-        </ProfileStyle>
+
+                </div>
+                }
+                </Gesture>
+            </ProfileStyle>
     );
-}
+  }
+  
+  export default Profile;
 
-export default Profile;
->>>>>>> progress css
+
+
+//   <Spring native to={{ x: down ? xDelta : 0 }} immediate={name => down && name === 'x'}>
+//   {({ x }) => (
+//   <div className="item" style={{ backgroundColor: xDelta < 0 ? '#FF1C68' : '#14D790' }}>
+
+//       <animated.div className="fg" style={{ transform: x.interpolate(x => `translate3d(${x}px,0,0)`) }}>
+//       {down && Math.abs(xDelta) > 50 ? (xDelta < 0 ? 'Cancel' : 'Accept') : children}
+//       </animated.div>
+//   </div>
+//   )}
+//   </Spring>

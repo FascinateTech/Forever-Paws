@@ -40,6 +40,8 @@
     "react-dom": "^16.4.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-spring": "^5.6.6",
+    "react-with-gesture": "^1.0.10",
     "reflect-metadata": "^0.1.10",
     "styled-components": "^3.4.2",
     "styled-container-component": "^2.0.0",
@@ -47,8 +49,7 @@
     "styled-navbar-component": "^2.0.0",
     "styled-system": "^3.0.2",
     "typeorm": "^0.2.7",
-    "webpack-node-externals": "^1.7.2",
-    "react-spring": "^5.6.6"
+    "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.29",
