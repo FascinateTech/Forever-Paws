@@ -6,4 +6,4 @@ const animals = Router();
 
 animals.route('/').get(getRes({ animals: getAnimals }));
 
-module.exports = animals;
+export default animals;

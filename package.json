@@ -93,6 +93,7 @@
       "syntax-dynamic-import"
     ]
   },
+  "sideEffects": false,
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/test_setup.js",
     "testURL": "http://localhost/"

@@ -6,4 +6,4 @@ const animal = Router();
 
 animal.route('/').post(postRes(saveAnimal));
 
-module.exports = animal;
+export default animal;

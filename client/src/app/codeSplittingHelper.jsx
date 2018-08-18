@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 export default importedComponent =>
-  class extends React.Component {
+  class extends Component {
     constructor(props) {
       super(props);
-      this.state = { Component: null };
+      this.state = { Comp: null };
     }
 
     async componentDidMount() {
       const { default: component } = await importedComponent();
-      this.setState({ Component: component });
+      this.setState({ Comp: component });
     }
 
     render() {
-      const { Component } = this.state;
-      return Component ? <Component {...this.props} /> : null;
+      const { Comp } = this.state;
+      return Comp ? <Comp {...this.props} /> : null;
     }
   };
