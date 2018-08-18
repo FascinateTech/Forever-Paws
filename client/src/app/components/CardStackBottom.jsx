@@ -11,7 +11,6 @@ const CardStyle2 = styled.div`
   height:${window.outerHeight*.8}px;
   border-radius: 15px;
   overflow: hidden;
-  margin: 10px 0px 10px 0px;
   background: lightblue;
   color: palevioletred;
   border: 2px solid black;

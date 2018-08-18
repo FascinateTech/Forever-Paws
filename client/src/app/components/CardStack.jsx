@@ -8,11 +8,10 @@ const CardStyle = styled.div`
   position: absolute;
   z-index: 2;
   top: ${window.outerHeight*.1}px;
-  width:${window.innerWidth-20}px;
+  width:${window.outerWidth-20}px;
   height:${window.outerHeight*.8}px;
   border-radius: 15px;
   overflow: hidden;
-  margin: 10px 0px 10px 0px;
   background: grey;
   color: palevioletred;
   border: 2px solid palevioletred;
