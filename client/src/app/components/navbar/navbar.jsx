@@ -1,34 +1,31 @@
-import React from 'react';
-// import styled from 'styled-components';
-import { Container } from 'styled-container-component';
-import { Navbar, NavbarLink } from 'styled-navbar-component';
-import { Nav } from 'styled-nav-component';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import styled from 'styled-components';
+// import logo from '../../Images/pawLogo.svg';
 
-// const Nav = styled.a`
-//   position: fixed;
-//   width: 100%;
-//   backround: black;
-//   height: 56px;
-// `;
+
+const Header = styled.header`
+  left: 0;
+  box-sizing: border-box;
+  z-index: 3;
+  flex: 1;
+  backround: black;
+  height: 50px;
+  width: 100%;
+  background-color: #ffb3da;
+`;
+
+const Nav = styled.nav`
+  color: palevioletred;
+  height: 50px;
+`;
 const NavComponent = () => (
-  <Container fluid>
-    <Navbar expandSm light>
-      <Nav justified>
-        <Link to="/settings">
-          <NavbarLink>
-            <span>&#9776;</span>
-          </NavbarLink>
-        </Link>
-        <Link to="/">
-          <NavbarLink light>Forever Paws</NavbarLink>
-        </Link>
-        <Link to="/userProfile">
-          <NavbarLink light>Your Profile</NavbarLink>
-        </Link>
+  <Fragment>
+    <Header>
+      <Nav>
+        <img src={logo} alt="paws" />
       </Nav>
-    </Navbar>
-  </Container>
+    </Header>
+  </Fragment>
 );
 
 export default NavComponent;
