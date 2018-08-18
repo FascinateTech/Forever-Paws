@@ -1,5 +1,6 @@
 const path = require('path');
-var webpack = require('webpack');
+const webpack = require('webpack');
+
 module.exports = {
   context: path.resolve(__dirname, 'client/src'),
   entry: {
@@ -28,7 +29,7 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      "React": "react",
+      React: 'react',
     }),
   ],
 };
