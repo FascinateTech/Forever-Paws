@@ -47,5 +47,5 @@ const getAnimals = () =>
       },
     ])
   );
-
-exports.getAnimals = getAnimals;
+const saveAnimal = () => {};
+export { getAnimals, saveAnimal };

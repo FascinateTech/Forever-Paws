@@ -83,7 +83,12 @@
   },
   "babel": {
     "presets": [
-      "env",
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ],
       "react"
     ],
     "plugins": [
