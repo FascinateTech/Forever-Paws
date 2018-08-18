@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getRes } from '../utils/utils';
-import { getAnimals } from '../../../src/helpers';
+import { getAnimals } from '../../../db/pets/pet';
 
 const animals = Router();
 

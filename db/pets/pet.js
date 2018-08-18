@@ -1,3 +1,9 @@
+import Pet from './index';
+
+const saveAnimal = async pet => Pet.create(pet);
+
+// const getAnimals = () => Pet.fetchAll();
+
 const getAnimals = () =>
   new Promise(resolve =>
     resolve([
@@ -47,5 +53,5 @@ const getAnimals = () =>
       },
     ])
   );
-const saveAnimal = () => {};
-export { getAnimals, saveAnimal };
+
+export { saveAnimal, getAnimals };

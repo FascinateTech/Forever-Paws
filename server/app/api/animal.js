@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { postRes } from '../utils/utils';
-import { saveAnimal } from '../../../src/helpers';
+import { saveAnimal } from '../../../db/pets/pet';
 
 const animal = Router();
 
