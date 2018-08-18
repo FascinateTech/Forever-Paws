@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|svg)$/,
         exclude: [/node_modules/],
         use: [
           {
@@ -27,7 +27,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.svg'],
   },
   externals: nodeExternals(),
   devtool: 'source-map',
