@@ -1,28 +1,38 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-// import logo from '../../Images/pawLogo.svg';
-
+import { Link } from 'react-router-dom';
+import Logo from './Logo';
+import Settings from './Settings';
+import Profile from './YourProfile';
 
 const Header = styled.header`
-  left: 0;
-  box-sizing: border-box;
-  z-index: 3;
-  flex: 1;
-  backround: black;
   height: 50px;
   width: 100%;
   background-color: #ffb3da;
 `;
 
 const Nav = styled.nav`
-  color: palevioletred;
-  height: 50px;
+  position: relative;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  top: 50%;
 `;
 const NavComponent = () => (
   <Fragment>
     <Header>
       <Nav>
-        <img src={logo} alt="paws" />
+        <Link to="/settings">
+          <Settings />
+        </Link>
+        <Link to="/">
+          <Logo />
+        </Link>
+        <Link to="/profile">
+          <Profile />
+        </Link>
       </Nav>
     </Header>
   </Fragment>
