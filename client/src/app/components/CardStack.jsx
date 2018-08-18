@@ -5,9 +5,15 @@ import Profile from './Profile';
 /* eslint react/prop-types:0 */
 
 const CardStyle = styled.div`
+  position: absolute;
+  z-index: 2;
+  top: ${window.outerHeight*.1}px;
+  width:${window.innerWidth-20}px;
+  height:${window.outerHeight*.8}px;
   border-radius: 15px;
-  margin: 0.5em 0em 0.5em 0em;
-  background: transparent;
+  overflow: hidden;
+  margin: 10px 0px 10px 0px;
+  background: grey;
   color: palevioletred;
   border: 2px solid palevioletred;
 `;
@@ -16,8 +22,8 @@ const ImgDiv = styled.div`
   position: relative;
 `;
 const Img = styled.img`
-  width: 100%;
-  height: auto;
+  width: auto;
+  height:${window.outerHeight*.55}px;
   `;
   
   // @withGesture
@@ -25,6 +31,7 @@ const Img = styled.img`
     constructor({onUp, onDown, onMove}) {
       super({onUp, onDown, onMove});
       this.state = {
+        renderCard: true,
         x: 0, y: 0, xDelta: 0, yDelta: 0, xInitial: 0, yInitial: 0, xPrev: 0, yPrev: 0, down: false 
       }
       this.onUp = onUp;
@@ -43,6 +50,7 @@ const Img = styled.img`
       this.onLostCapture = this.onLostCapture.bind(this)
 
       this.onRelease = this.onRelease.bind(this)
+      this.cardPos = this.cardPos.bind(this)
 
     }
 
@@ -133,28 +141,54 @@ const Img = styled.img`
           this.setState(this.onMove ? this.onMove(newProps) : newProps, () => (this.busy = false))
         }
         
-        consoleMe(e) {
-          console.log("dedede",e.touches[0])
-        }
-
-        componentWillMount(){
+        componentDidMount(){
+          //snaps back to place:
           window.addEventListener('touchend', this.onRelease)
+          this.consoleLogger();
         }
         
         onRelease(){
-          if(this.state.down) {
-            console.log("HELLO",this.state.down)}
+          if(this.state.down && Math.abs(this.state.xDelta)<150) {
+            console.log("HELLO",this.state.down)
+            console.log("HELLO",this.state.xDelta)
             this.setState({
               xDelta:0,
               yDelta:0
             })
           }
-        
-        render() {
+          else {
+            //discard card
+            this.setState({
+              renderCard: false
+            })
+            //call next pet
+            this.props.nextPet()
+            //set this card back to 0,0
+            this.setState({
+              xDelta:0,
+              yDelta:0,
+              renderCard: true
+            })
+          }
+        }
+        //sets the card css position or disables
+        cardPos() {
+          if(this.state.renderCard) {
+            return `translate3d(${this.state.xDelta}px,${this.state.yDelta}px,0px)`
+          } 
+          return `translate3d(500px,500px,0px)`
+        }
+
+        consoleLogger(){
+          console.log("this is window innerWidth:",window.innerWidth);
+          console.log("this is window outerHeight:",window.window.outerHeight);
+          console.log("this is window outerWidth:",window.outerWidth);
+        }
+
+    render() {
           const { down, x, y, xDelta, yDelta, xInitial, yInitial  } = this.state
           const { style, className, ...props } = this.props
           
-
     return (
       <div 
           onMouseDown={this.handleMouseDown}
@@ -169,7 +203,7 @@ const Img = styled.img`
           >
         <CardStyle style={{  
         'background': 'black',
-        'transform': `translate3d(${xDelta}px,${yDelta}px,0px)`,
+        'transform': `${this.cardPos()}`,
         }}>
             <ImgDiv>
               <Img alt="dog" src={this.props.profileQueue.picture} />

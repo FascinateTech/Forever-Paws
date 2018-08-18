@@ -6,11 +6,14 @@ import { Spring, animated, Transition } from 'react-spring'
 /* eslint react/prop-types:0 */
 
 const ProfileStyle = styled.div`
-  border-radius: 3px;
-  margin: 0.5em;
-  padding: 0.25em 1em;
+height:${window.outerHeight*.2}px;
+  border-radius: 4px;
+  margin: 0.2em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
   color: palevioletred;
   border: 2px solid palevioletred;
+  background: orange;
+
 `;
 
 class Profile extends Component {
