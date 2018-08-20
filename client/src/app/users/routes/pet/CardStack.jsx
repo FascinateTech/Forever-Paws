@@ -72,9 +72,9 @@ class CardStack extends Component {
   }
 
   onRelease() {
-    const { down, xDelta } = this.state;
+    const { xDelta } = this.state;
     const { nextPet } = this.props;
-    if (down && Math.abs(xDelta) < 150) {
+    if (Math.abs(xDelta) < 150) {
       this.setState({
         xDelta: 0,
         yDelta: 0,
