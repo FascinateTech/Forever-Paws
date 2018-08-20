@@ -11,7 +11,7 @@ db.knex.schema.hasTable('media').then(
         media.integer('petId');
         media.string('link');
       })
-      .then(table => Console.log(table))
+      .then(table => `Media Table Created: ${Console.log(table)}`)
 );
 
 export default db.model('Media', db.Model.extend({ tableName: 'media', hasTimestamps: true }));

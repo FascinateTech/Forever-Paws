@@ -63,6 +63,14 @@ class CardStack extends Component {
     window.addEventListener('touchend', this.onRelease);
   }
 
+  componentWillReceiveProps() {
+    this.setState({
+      xDelta: 0,
+      yDelta: 0,
+      renderCard: true,
+    });
+  }
+
   onRelease() {
     const { down, xDelta } = this.state;
     const { nextPet } = this.props;
@@ -78,12 +86,7 @@ class CardStack extends Component {
       });
       // call next pet
       nextPet();
-      // set this card back to 0,0
-      this.setState({
-        xDelta: 0,
-        yDelta: 0,
-        renderCard: true,
-      });
+      // set this card back to 0,0 in componentWillReceiveProps
     }
   }
 

@@ -15,7 +15,7 @@ db.knex.schema.hasTable('users').then(
         user.string('address');
         user.string('email');
       })
-      .then(table => Console.log(table))
+      .then(table => `Users Table Created: ${Console.log(table)}`)
 );
 
 export default db.model('User', db.Model.extend({ tableName: 'users', hasTimestamps: true }));
