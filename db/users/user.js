@@ -2,7 +2,7 @@ import User from './index';
 
 // FOR PASSPORT
 // =========================
-const createOrFetchUser = async (request, accessToken, refreshToken, profile, done) => {
+const createOrFetchUserGoogle = async (request, accessToken, refreshToken, profile, done) => {
   try {
     const user = await User.where({ googleId: profile.id }).fetch();
     if (user) {
@@ -22,13 +22,7 @@ const createOrFetchUser = async (request, accessToken, refreshToken, profile, do
   }
 };
 
-const getUserByGoogleId = async (googleId, done) => {
-  const user = await User.where({ googleId }).fetch();
-  done(null, user.toJSON());
-};
-// =========================
-
-const createOrFindUser = async (request, accessToken, refreshToken, profile, done) => {
+const createOrFetchUserFacebook = async (request, accessToken, refreshToken, profile, done) => {
   try {
     const user = await User.where({ facebookId: profile.id }).fetch();
     if (user) {
@@ -36,10 +30,9 @@ const createOrFindUser = async (request, accessToken, refreshToken, profile, don
     } else {
       const newUser = await User.forge({
         facebookId: profile.id,
-        username: profile.username,
-        firstName: profile.first_name,
-        lastName: profile.last_name,
-        email: profile.emails[0].value,
+        username: profile.displayName,
+        firstName: profile.displayName.split(' ')[0],
+        lastName: profile.displayName.split(' ').splice(-1),
       }).save();
       done(null, newUser.toJSON());
     }
@@ -48,4 +41,15 @@ const createOrFindUser = async (request, accessToken, refreshToken, profile, don
   }
 };
 
-export { createOrFetchUser, getUserByGoogleId, createOrFindUser };
+const getUserByOauthId = async (id, done) => {
+  let user = await User.where({ googleId: id }).fetch();
+  if (user) {
+    done(null, user.toJSON());
+  } else {
+    user = await User.where({ facebookId: id }).fetch();
+    done(null, user.toJSON());
+  }
+};
+// =========================
+
+export { createOrFetchUserGoogle, getUserByOauthId, createOrFetchUserFacebook };

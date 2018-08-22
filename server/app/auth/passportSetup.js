@@ -1,7 +1,7 @@
 import passport from 'passport';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
-import { FacebookStrategy } from 'passport-facebook';
-import { createOrFetchUser, getUserByGoogleId, createOrFindUser } from '../../../db/users/user';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+import { createOrFetchUserGoogle, getUserByOauthId, createOrFetchUserFacebook } from '../../../db/users/user';
 
 const {
   GOOGLE_CLIENT_ID,
@@ -19,7 +19,7 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: GOOGLE_CALLBACK_URL,
     },
-    createOrFetchUser
+    createOrFetchUserGoogle
   )
 );
 
@@ -30,11 +30,11 @@ passport.use(
       clientSecret: FACEBOOK_APP_SECRET,
       callbackURL: FACEBOOK_CALLBACK_URL,
     },
-    createOrFindUser
+    createOrFetchUserFacebook
   )
 );
-passport.serializeUser((user, done) => done(null, user.googleId));
+passport.serializeUser((user, done) => done(null, user.googleId || user.facebookId));
 
-passport.deserializeUser(getUserByGoogleId);
+passport.deserializeUser(getUserByOauthId);
 
 export default passport;
