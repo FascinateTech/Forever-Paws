@@ -28,7 +28,7 @@ const getUserByGoogleId = async (googleId, done) => {
 };
 // =========================
 
-const findOrCreate = async (request, accessToken, refreshToken, profile, done) => {
+const createOrFindUser = async (request, accessToken, refreshToken, profile, done) => {
   try {
     const user = await User.where({ facebookId: profile.id }).fetch();
     if (user) {
@@ -48,4 +48,4 @@ const findOrCreate = async (request, accessToken, refreshToken, profile, done) =
   }
 };
 
-export { createOrFetchUser, getUserByGoogleId };
+export { createOrFetchUser, getUserByGoogleId, createOrFindUser };

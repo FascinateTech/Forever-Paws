@@ -1,9 +1,16 @@
 import passport from 'passport';
 import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth';
-import { createOrFetchUser, getUserByGoogleId } from '../../../db/users/user';
+import { FacebookStrategy } from 'passport-facebook';
+import { createOrFetchUser, getUserByGoogleId, createOrFindUser } from '../../../db/users/user';
 
-const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CALLBACK_URL } =
-  process.env.NODE_ENV === 'production' ? process.env : require('../../../config/config');
+const {
+  GOOGLE_CLIENT_ID,
+  GOOGLE_CLIENT_SECRET,
+  GOOGLE_CALLBACK_URL,
+  FACEBOOK_APP_ID,
+  FACEBOOK_APP_SECRET,
+  FACEBOOK_CALLBACK_URL,
+} = process.env.NODE_ENV === 'production' ? process.env : require('../../../config/config');
 
 passport.use(
   new GoogleStrategy(
@@ -17,11 +24,14 @@ passport.use(
 );
 
 passport.use(
-  new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: FACEBOOK_CALLBACK_URL,
-  })
+  new FacebookStrategy(
+    {
+      clientID: FACEBOOK_APP_ID,
+      clientSecret: FACEBOOK_APP_SECRET,
+      callbackURL: FACEBOOK_CALLBACK_URL,
+    },
+    createOrFindUser
+  )
 );
 passport.serializeUser((user, done) => done(null, user.googleId));
 
