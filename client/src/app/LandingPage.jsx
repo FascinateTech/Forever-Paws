@@ -1,7 +1,9 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { Link } from 'react-router-dom';
+import bg from './images/bg.jpg';
+import tree from './images/pawtree.png';
 import { post } from 'axios';
 
 const sampleData = [
@@ -57,17 +59,75 @@ const Button = styled.button`
   color: palevioletred;
   border: 2px solid palevioletred;
 `;
+
+const styles = {
+  main: {
+    background: `url(${bg}) no-repeat`,
+    backgroundSize: '100%',
+    paddingBottom: '1000px',
+  },
+
+  tree: {
+    // position: 'absolute',
+    paddingTop: '15px',
+    top: '30%',
+    right: '0',
+  },
+
+  title: {
+    // position: 'absolute',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: '56px',
+  },
+
+  p: {
+    // position: 'absolute',
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: '18px',
+    marginBottom: '0',
+  },
+};
+
 const LandingPage = () => (
-  <div style={{ textAlign: 'center' }}>
-    <a href="/auth/google">
-      <Button type="button">Login google</Button>
-    </a>
-    <a href="/auth/facebook">
-      <Button type="button">Login facebook</Button>
-    </a>
-    <button type="button" onClick={makeData}>
-      Hello
-    </button>
+  <div>
+    <div style={styles.main}>
+      <nav
+        className="navbar navbar-light justify-content-between mx-3"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0)', padding: '28px' }}
+      >
+        <a className="navbar-brand" style={{ color: '#fff', fontWeight: 'bold', fontSize: '32px' }} href="/">
+          Paws.
+        </a>
+        <a href="/auth/google">
+          <Button type="button">Login google</Button>
+        </a>
+        <a href="/auth/facebook">
+          <Button type="button">Login facebook</Button>
+        </a>
+        <button type="button" onClick={makeData}>
+          Hello
+        </button>
+      </nav>
+      <div className="row ml-5 align-items-center">
+        <div className="col pb-5  mb-5 col-12-md">
+          <h1 style={styles.title}>Share your pets</h1>
+          <h1 style={styles.title}>Help others find a home.</h1>
+          <p style={styles.p} className="mt-2">
+            Paws is a community for pet lovers to share and view pictures of pets while serving as a platform to aid the
+            adoption of animals in need. As you browse through thousands of pictures of pets, Paws will occasionally
+            suggest pets near you available for adoption based on your preferences.
+          </p>
+          {/* <button className="btn btn-outline-light mt-4 mb-5" type="button">
+            Sign up
+          </button> */}
+        </div>
+        <div className="col">
+          <img src={tree} style={styles.tree} alt="loading" />
+        </div>
+      </div>
+    </div>
   </div>
 );
 
