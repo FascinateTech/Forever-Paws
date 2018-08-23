@@ -36,6 +36,7 @@ class CardStack extends Component {
       y: 0,
       xDelta: 0,
       yDelta: 0,
+      xInitial: 0,
       yInitial: 0,
       xPrev: 0,
       yPrev: 0,
