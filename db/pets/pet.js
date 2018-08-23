@@ -9,21 +9,9 @@ const getAnimals = () =>
     qb.limit(3);
   }).fetchAll();
 
-// get like count for Pet
-const fetchLikeCount = (id) =>
-  Pet.query(qb => {
-    qb.select('likeCounter').where('id','=',id)
-  }).fetchAll();
+const addLikeToPet = async ({ id }) => {
+  const pet = await Pet.where({ id }).fetch();
+  await pet.set('likeCounter', pet.attributes.likeCounter + 1).save();
+};
 
-// increment Pet's like count
-const incrementLikeCount = (id, lastCount) => 
-  Pet.query(qb => {
-    qb.where('id','=',id).update({
-      likeCounter: lastCount+1})
-  }).fetchAll()  
-
-// Get and increment Pet's like count
-const getIncrementCount = ({id}) => fetchLikeCount(id).then((data)=>incrementLikeCount(id,data.toJSON()[0].likeCounter));
-
-export { saveAnimal, getAnimals, getIncrementCount };
-
+export { saveAnimal, getAnimals, addLikeToPet };

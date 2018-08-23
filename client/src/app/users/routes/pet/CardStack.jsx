@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { post } from 'axios';
+import { patch } from 'axios';
 import Profile from './Profile';
 
 /* eslint react/prop-types:0 */
@@ -73,7 +73,7 @@ class CardStack extends Component {
   }
 
   onRelease() {
-    const {profileQueue} = this.props;
+    const { profileQueue } = this.props;
 
     const { xDelta } = this.state;
     const { nextPet } = this.props;
@@ -83,9 +83,8 @@ class CardStack extends Component {
         yDelta: 0,
       });
     } else {
-      if(xDelta>150) {
-        // console.log(profileQueue.id);
-        post('/api/animal/addLike', {id: profileQueue.id}).then((e)=>console.log("Added ++Like for pet ID: ", profileQueue.id))
+      if (xDelta > 150) {
+        patch('/api/animal/addLike', { id: profileQueue.id });
       }
       // discard card
       this.setState({
