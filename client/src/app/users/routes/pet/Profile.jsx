@@ -47,7 +47,7 @@ export default class extends Component {
           {name}, {age}
         </P1>
         <Span style={{ float: 'left', 'font-style': 'italic' }}>{breed}</Span>{' '}
-        <Span style={{ float: 'right' }}>zip: {location} </Span>
+        {/* <Span style={{ float: 'right' }}>zip: {location} </Span> */}
         <P>
           <br />
           <br />
