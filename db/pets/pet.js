@@ -4,10 +4,11 @@ import db from '../index';
 
 const saveAnimal = (pet, { user }) => {
   const { longitude, latitude } = pet;
-  delete pet.longitude;
-  delete pet.latitude;
+  const petREFACTORTHIS = pet;
+  delete petREFACTORTHIS.longitude;
+  delete petREFACTORTHIS.latitude;
   Pet.forge({
-    ...pet,
+    ...petREFACTORTHIS,
     userId: user,
     point: db.knex.raw(`ST_SetSRID(ST_Point(${longitude},${latitude}) , 4326)`),
   }).save();
@@ -41,13 +42,11 @@ const getClosestPets = userdata => {
   const { userLatitude, userLongitude } = JSON.parse(userdata);
   return db.knex
     .raw(
-      `select *,st_distance(ST_transform(ST_GeomFromText('POINT(-77.1202586 39.1110251)', 4326),2163), ST_Transform(pets.point,2163)) as distance from pets
-    where pets.point IS NULL OR ST_Dwithin(ST_transform(ST_GeomFromText('POINT(-77.1202586 39.1110251)', 4326),2163), ST_Transform(pets.point,2163), 100000) 
+      `select *,st_distance(ST_transform(ST_GeomFromText('POINT(${userLongitude} ${userLatitude})', 4326),2163), ST_Transform(pets.point,2163)) as distance from pets
+    where pets.point IS NULL OR ST_Dwithin(ST_transform(ST_GeomFromText('POINT(${userLongitude} ${userLatitude})', 4326),2163), ST_Transform(pets.point,2163), 100000) 
     ORDER BY random() LIMIT 5`
     )
-    .then(data => {
-      return data.rows;
-    });
+    .then(data => data.rows);
 };
 
 export { saveAnimal, updateAnimal, getAnimal, getAnimals, getAnimalsByUserId, addLikeToPet, getClosestPets };

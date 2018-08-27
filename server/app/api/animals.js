@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getRes, postRes } from '../utils/utils';
+import { getRes } from '../utils/utils';
 import { getAnimals, getAnimalsByUserId, getClosestPets } from '../../../db/pets/pet';
 import { getTopPetsOfTheDay } from '../../../db/petlikes/petLike';
 
