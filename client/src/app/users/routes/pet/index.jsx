@@ -25,7 +25,7 @@ export default class extends Component {
   async fetchPets() {
     const { profileQueue } = this.state;
     try {
-      const { data } = await get('/api/animals');
+      const { data } = await get('/api/animals/closest');
       this.setState({
         profileQueue: profileQueue.concat(data.animals),
       });

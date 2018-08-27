@@ -10,7 +10,7 @@ const getRes = (dbFunctions, errMessage = 'Data Not Found', status = 200, errSta
     );
     const response = datas.reduce((output, data, i) => {
       const obj = output;
-      obj[dbFunctionTuples[i][0]] = data.toJSON();
+      obj[dbFunctionTuples[i][0]] = data;
       return obj;
     }, {});
     res.status(status).send(response);
