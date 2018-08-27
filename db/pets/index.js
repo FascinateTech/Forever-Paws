@@ -9,7 +9,7 @@ db.knex.schema.hasTable('pets').then(
         pet.string('name', 30);
         pet.boolean('adoptable').defaultTo(false);
         pet.string('userId');
-        pet.integer('likecounter').defaultTo(0);
+        pet.integer('likeCounter').defaultTo(0);
         pet.string('breed');
         pet.string('description');
         pet.string('age');
