@@ -1,10 +1,9 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { post } from 'axios';
 import bg from './images/bg.jpg';
 import tree from './images/pawtree.png';
-import { post } from 'axios';
 import goog from './images/goog.png';
 import fb from './images/fb.png';
 
@@ -113,6 +112,9 @@ const LandingPage = () => (
           <Button type="button" onClick={makeData}>
             Load Data
           </Button>
+          <Link to="/portal">
+            <Button type="button">Shelters</Button>
+          </Link>
         </div>
       </nav>
       <div className="container" style={{ maxWidth: '80%' }}>
