@@ -28,8 +28,7 @@ const NavBar = () => (
       <a href="/auth/logout">
         <span style={{ paddingleft: '20px', color: 'white', fontSize: '28px' }}> Paws.</span>
       </a>
-
-      <Link to="/profile">
+      <Link to="/topdogs">
         <img src={heart} style={{ float: 'right', color: 'white', height: '30px', width: '30px' }} alt="heart" />
       </Link>
     </nav>

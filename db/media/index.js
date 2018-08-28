@@ -1,7 +1,5 @@
 import db from '../index';
 
-const Console = console;
-
 db.knex.schema.hasTable('media').then(
   exists =>
     exists ||
@@ -10,10 +8,9 @@ db.knex.schema.hasTable('media').then(
         media.increments('id').primary();
         media.integer('petId');
         media.string('link');
-        media.timestamp('created_at');
-        media.timestamp('updated_at');
       })
-      .then(table => `Media Table Created: ${Console.log(table)}`)
+      // eslint-disable-next-line
+      .then(table => `Media Table Created: ${console.log(table)}`)
 );
 
-export default db.model('Media', db.Model.extend({ tableName: 'media', hasTimestamps: true }));
+export default db.model('Media', db.Model.extend({ tableName: 'media' }));

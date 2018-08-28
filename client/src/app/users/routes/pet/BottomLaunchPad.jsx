@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { patch } from 'axios';
 import dislike from '../../../images/dislike.png';
 import like from '../../../images/like.png';
 
@@ -13,14 +14,26 @@ const LaunchpadStyle = styled.div`
   background: transparent;
 `;
 
+const Button = styled.button`
+  background: transparent;
+  border: 0;
+`;
+
 /* eslint react/prop-types:0 */
-export default ({ nextPet }) => (
+export default ({ nextPet, id }) => (
   <LaunchpadStyle>
-    <button type="submit" onClick={nextPet}>
+    <Button type="submit" onClick={nextPet}>
       <img src={dislike} style={{ float: 'left', color: 'white', height: '60px', width: '60px' }} alt="profile" />
-    </button>
-    <button style={{ float: 'right' }} type="submit" onClick={nextPet}>
+    </Button>
+    <Button
+      style={{ float: 'right' }}
+      type="submit"
+      onClick={() => {
+        patch('/api/animal/addlike', { id });
+        nextPet();
+      }}
+    >
       <img src={like} style={{ float: 'right', color: 'white', height: '60px', width: '60px' }} alt="profile" />
-    </button>
+    </Button>
   </LaunchpadStyle>
 );

@@ -1,13 +1,16 @@
 import codeSplittingHelper from './codeSplittingHelper';
 
-const PetIndex = codeSplittingHelper(() => import('../users/routes/pet'));
 const Profile = codeSplittingHelper(() => import('../users/routes/pet/Profile'));
 const User = codeSplittingHelper(() => import('../users/routes/pet/User'));
-const LandingPage = codeSplittingHelper(() => import('../LandingPage'));
 const AddPet = codeSplittingHelper(() => import('../shelters/routes/AddPet'));
 const Account = codeSplittingHelper(() => import('../shelters/routes/shelter'));
 const Login = codeSplittingHelper(() => import('../shelters/routes/Login'));
-const MyPet = codeSplittingHelper(() => import('../shelters/routes/Pets'));
+const OrgPets = codeSplittingHelper(() => import('../shelters/routes/Pets'));
+const LandingPage = codeSplittingHelper(() => import('../LandingPage'));
+const GetLocation = codeSplittingHelper(() => import('../getUserLocation'));
+const PetIndex = codeSplittingHelper(() => import('../users/routes/pet/index'));
+const TopDogs = codeSplittingHelper(() => import('../users/routes/topdogs/index'));
+const MyPets = codeSplittingHelper(() => import('../users/routes/mypets/index'));
 
 export default [
   {
@@ -46,8 +49,23 @@ export default [
     exact: true,
   },
   {
+    path: '/orgpets',
+    component: OrgPets,
+    exact: true,
+  },
+  {
+    path: '/topdogs',
+    component: TopDogs,
+    exact: true,
+  },
+  {
     path: '/mypets',
-    component: MyPet,
+    component: MyPets,
+    exact: true,
+  },
+  {
+    path: '/location',
+    component: GetLocation,
     exact: true,
   },
 ];

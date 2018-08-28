@@ -1,7 +1,5 @@
 import db from '../index';
 
-const Console = console;
-
 db.knex.schema.hasTable('pets').then(
   exists =>
     exists ||
@@ -10,15 +8,16 @@ db.knex.schema.hasTable('pets').then(
         pet.increments('id').primary();
         pet.string('name', 30);
         pet.boolean('adoptable').defaultTo(false);
+        pet.string('userId');
         pet.integer('likeCounter').defaultTo(0);
         pet.string('breed');
         pet.string('description');
         pet.string('age');
         pet.string('picture');
-        pet.timestamp('created_at');
-        pet.timestamp('updated_at');
+        pet.specificType('point', 'geometry(point, 4326)');
       })
-      .then(table => `Pets Table Created: ${Console.log(table)}`)
+      // eslint-disable-next-line
+      .then(table => `Pets Table Created: ${console.log(table)}`)
 );
 
-export default db.model('Pet', db.Model.extend({ tableName: 'pets', hasTimestamps: true }));
+export default db.model('Pet', db.Model.extend({ tableName: 'pets' }));

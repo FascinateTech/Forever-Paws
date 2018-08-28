@@ -19,7 +19,7 @@ export default () => (
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/mypets">
+            <Link to="/orgpets">
               <span style={{ color: 'white', marginLeft: '40px' }}>Pets</span>
             </Link>
           </li>

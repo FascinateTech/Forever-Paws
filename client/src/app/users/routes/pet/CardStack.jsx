@@ -27,7 +27,7 @@ const Img = styled.img`
   border-radius: 15px;
 `;
 
-class CardStack extends Component {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,10 +76,12 @@ class CardStack extends Component {
   }
 
   onRelease() {
-    const { profileQueue } = this.props;
-
+    const {
+      profile: { id },
+      nextPet,
+    } = this.props;
     const { xDelta } = this.state;
-    const { nextPet } = this.props;
+
     if (Math.abs(xDelta) < 150) {
       this.setState({
         xDelta: 0,
@@ -87,13 +89,9 @@ class CardStack extends Component {
       });
     } else {
       if (xDelta > 150) {
-        patch('/api/animal/addLike', { id: profileQueue.id });
+        patch('/api/animal/addlike', { id });
       }
-      // discard card
-      this.setState({
-        renderCard: false,
-      });
-      // call next pet
+      this.setState({ renderCard: false });
       nextPet();
       // set this card back to 0,0 in componentWillReceiveProps
     }
@@ -117,9 +115,7 @@ class CardStack extends Component {
   }
 
   onMove(event) {
-    if (!this.isDragging) {
-      return;
-    }
+    if (!this.isDragging) return;
     const { left, top } = this.extractPositionDelta(event);
 
     this.setState(({ circleLeft, circleTop }) => ({
@@ -195,9 +191,9 @@ class CardStack extends Component {
     this.handleMouseDown(e.touches[0]);
   }
 
-  extractPositionDelta(event) {
-    const left = event.pageX;
-    const top = event.pageY;
+  extractPositionDelta(e) {
+    const left = e.pageX;
+    const top = e.pageY;
     const delta = {
       left: left - this.previousLeft,
       top: top - this.previousTop,
@@ -210,14 +206,11 @@ class CardStack extends Component {
   // sets the card css position or disables
   cardPos() {
     const { renderCard, xDelta, yDelta } = this.state;
-    if (renderCard) {
-      return `translate3d(${xDelta}px,${yDelta}px,0px)`;
-    }
-    return `translate3d(500px,500px,0px)`;
+    return renderCard ? `translate3d(${xDelta}px,${yDelta}px,0px)` : `translate3d(500px,500px,0px)`;
   }
 
   render() {
-    const { profileQueue } = this.props;
+    const { profile } = this.props;
 
     return (
       <Fragment>
@@ -235,13 +228,11 @@ class CardStack extends Component {
           }}
         >
           <ImgDiv>
-            <Img alt="dog" src={profileQueue.picture} />
+            <Img alt="dog" src={profile.picture} />
           </ImgDiv>
-          <Profile profile={profileQueue} />
+          <Profile profile={profile} />
         </CardStyle>
       </Fragment>
     );
   }
 }
-
-export default CardStack;
