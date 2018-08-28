@@ -13,6 +13,4 @@ animals.get('/dailytop', getRes({ dailyTop: getTopPetsOfTheDay }));
 
 animals.get('/my', getRes({ myPets: getAnimalsByUserId }));
 
-// animals.route('/closest').get(getRes({ animals: getClosestPets }));
-
 export default animals;

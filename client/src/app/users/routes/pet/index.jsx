@@ -27,7 +27,7 @@ export default class extends Component {
     try {
       if (localStorage.getItem('myLocationData')) {
         const { data } = await get('/api/animals/closest', {
-          headers: { Location: localStorage.getItem('myLocationData') },
+          params: { location: JSON.parse(localStorage.getItem('myLocationData')) },
         });
         this.setState({
           profileQueue: profileQueue.concat(data.animals),

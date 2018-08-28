@@ -38,15 +38,18 @@ const addLikeToPet = async ({ id }) => {
   await addLikeForTodayToPetById(id);
 };
 
-const getClosestPets = userdata => {
-  const { userLatitude, userLongitude } = JSON.parse(userdata);
-  return db.knex
-    .raw(
-      `select *,st_distance(ST_transform(ST_GeomFromText('POINT(${userLongitude} ${userLatitude})', 4326),2163), ST_Transform(pets.point,2163)) as distance from pets
+const getClosestPets = async ({ location: { userLatitude, userLongitude } }) => {
+  const randomPets = await db.knex.raw(
+    `select *,st_distance(ST_transform(ST_GeomFromText('POINT(${userLongitude} ${userLatitude})', 4326),2163), ST_Transform(pets.point,2163)) as distance from pets
     where pets.point IS NULL OR ST_Dwithin(ST_transform(ST_GeomFromText('POINT(${userLongitude} ${userLatitude})', 4326),2163), ST_Transform(pets.point,2163), 100000) 
     ORDER BY random() LIMIT 5`
-    )
-    .then(data => data.rows);
+  );
+  return {
+    toJSON() {
+      return this.randomPets.rows;
+    },
+    randomPets,
+  };
 };
 
 export { saveAnimal, updateAnimal, getAnimal, getAnimals, getAnimalsByUserId, addLikeToPet, getClosestPets };

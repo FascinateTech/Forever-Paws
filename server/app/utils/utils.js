@@ -5,12 +5,17 @@ const respondError = (res, err, status, message) => res.status(status).send({ er
 const getRes = (dbFunctions, errMessage = 'Data Not Found', status = 200, errStatus = 404) => async (req, res) => {
   const dbFunctionTuples = Object.entries(dbFunctions);
   try {
+    const query = Object.entries(req.query).reduce((obj, tuple) => {
+      const q = obj;
+      q[tuple[0]] = JSON.parse(tuple[1]);
+      return q;
+    }, {});
     const datas = await Promise.all(
-      dbFunctionTuples.map(tuple => tuple[1](req.headers.location, req.headers.location || req.session))
+      dbFunctionTuples.map(tuple => tuple[1](query, req.session.passport || req.session))
     );
     const response = datas.reduce((output, data, i) => {
       const obj = output;
-      obj[dbFunctionTuples[i][0]] = data;
+      obj[dbFunctionTuples[i][0]] = data.toJSON();
       return obj;
     }, {});
     res.status(status).send(response);
