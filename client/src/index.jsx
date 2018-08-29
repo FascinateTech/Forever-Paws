@@ -4,10 +4,10 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './app/app';
 import registerServiceWorker from '../../server/app/registerServiceWorker';
 
+registerServiceWorker();
 hydrate(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
   document.getElementById('app')
 );
-registerServiceWorker();
