@@ -61,7 +61,9 @@ export default class extends Component {
             <p>Upload Pet</p>{' '}
           </Field>
           <Field style={{ top: '34%' }}>
-            <p>Logout</p>{' '}
+            <a href="/auth/logout">
+              <p>Logout</p>{' '}
+            </a>
           </Field>
         </UserStyle>
       </div>

@@ -24,10 +24,9 @@ const NavBar = () => (
       <Link to="/user">
         <img src={profile} style={{ float: 'left', color: 'white', height: '30px', width: '30px' }} alt="profile" />
       </Link>
-
-      <a href="/auth/logout">
+      <Link to="/pets">
         <span style={{ paddingleft: '20px', color: 'white', fontSize: '28px' }}> Paws.</span>
-      </a>
+      </Link>
       <Link to="/topdogs">
         <img src={heart} style={{ float: 'right', color: 'white', height: '30px', width: '30px' }} alt="heart" />
       </Link>
