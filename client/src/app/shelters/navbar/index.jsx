@@ -14,7 +14,7 @@ export default () => (
         <div className="collapse navbar-collapse" id="navbarSupportedContent" />
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <Link to="/addpet">
+            <Link to="/petupload">
               <span style={{ color: 'white', marginLeft: '40px' }}>Add Pet</span>
             </Link>
           </li>

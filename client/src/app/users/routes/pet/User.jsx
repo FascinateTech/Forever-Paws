@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NavComponent from '../../navbar/index';
 
@@ -54,12 +55,16 @@ export default class extends Component {
           <Profile>
             <p>Username</p>
           </Profile>
-          <Field>
-            <p>My Pets</p>{' '}
-          </Field>
-          <Field style={{ top: '27%' }}>
-            <p>Upload Pet</p>{' '}
-          </Field>
+          <Link to="/mypets">
+            <Field>
+              <p>My Pets</p>{' '}
+            </Field>
+          </Link>
+          <Link to="/petupload">
+            <Field style={{ top: '27%' }}>
+              <p>Upload Pet</p>{' '}
+            </Field>
+          </Link>
           <Field style={{ top: '34%' }}>
             <a href="/auth/logout">
               <p>Logout</p>{' '}
