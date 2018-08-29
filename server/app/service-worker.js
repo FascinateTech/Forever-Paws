@@ -1,7 +1,8 @@
-let doCache = false;
+const doCache = false;
 
-let CACHE_NAME = 'my-pwa-cache-v1';
+const CACHE_NAME = 'my-pwa-cache-v1';
 
+// eslint-disable-next-line
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -9,19 +10,22 @@ self.addEventListener('activate', event => {
       Promise.all(
         keyList.map(key => {
           if (!cacheWhitelist.includes(key)) {
-            console.log(`Deleting cache: ${  key}`);
+            // eslint-disable-next-line
+            console.log(`Deleting cache: ${key}`);
             return caches.delete(key);
           }
+          return undefined;
         })
       )
     )
   );
 });
 
-self.addEventListener('install', (event) => {
+// eslint-disable-next-line
+self.addEventListener('install', event => {
   if (doCache) {
     event.waitUntil(
-      caches.open(CACHE_NAME).then(function(cache) {
+      caches.open(CACHE_NAME).then(cache => {
         fetch('manifest.json')
           .then(response => {
             response.json();
@@ -29,6 +33,8 @@ self.addEventListener('install', (event) => {
           .then(assets => {
             const urlsToCache = ['/', assets['main.js']];
             cache.addAll(urlsToCache);
+
+            // eslint-disable-next-line
             console.log('cached');
           });
       })
@@ -36,12 +42,9 @@ self.addEventListener('install', (event) => {
   }
 });
 
-self.addEventListener('fetch', (event) => {
+// eslint-disable-next-line
+self.addEventListener('fetch', event => {
   if (doCache) {
-    event.respondWith(
-      caches.match(event.request).then(function(response) {
-        return response || fetch(event.request);
-      })
-    );
+    event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
   }
 });
