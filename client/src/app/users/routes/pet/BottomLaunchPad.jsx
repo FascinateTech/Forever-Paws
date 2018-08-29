@@ -1,34 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
+import { patch } from 'axios';
+import dislike from '../../../images/dislike.png';
+import like from '../../../images/like.png';
 
 const LaunchpadStyle = styled.div`
   position: absolute;
-  top: ${window.outerHeight * 0.9}px;
-  height: ${window.outerHeight * 0.1}px;
-  width: ${window.outerWidth - 20}px;
-  align-items: center;
-  border-radius: 3px;
-  background: white;
-  color: palevioletred;
-  border: 2px solid palevioletred;
-`;
-const Button = styled.button`
-  padding: 5px 5px 5px 5px;
-  border-radius: 3px;
-  margin: 20px 40px;
+  top: 85%;
+  height: 15%;
+  width: 75%;
+  margin-left: 12%;
+  margin-right: 12%;
   background: transparent;
-  color: palevioletred;
-  border: 2px solid palevioletred;
+`;
+
+const Button = styled.button`
+  background: transparent;
+  border: 0;
 `;
 
 /* eslint react/prop-types:0 */
-export default ({ nextPet }) => (
+export default ({ nextPet, id }) => (
   <LaunchpadStyle>
     <Button type="submit" onClick={nextPet}>
-      {`Don't Like`}
+      <img src={dislike} style={{ float: 'left', color: 'white', height: '60px', width: '60px' }} alt="profile" />
     </Button>
-    <Button type="submit" onClick={nextPet}>
-      Like
+    <Button
+      style={{ float: 'right' }}
+      type="submit"
+      onClick={() => {
+        patch('/api/animal/addlike', { id });
+        nextPet();
+      }}
+    >
+      <img src={like} style={{ float: 'right', color: 'white', height: '60px', width: '60px' }} alt="profile" />
     </Button>
   </LaunchpadStyle>
 );

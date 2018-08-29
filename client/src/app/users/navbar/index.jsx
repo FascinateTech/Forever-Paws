@@ -1,41 +1,36 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import Logo from '../../images/pawLogo';
-import Settings from './Settings';
-import Profile from './YourProfile';
+import heart from '../../images/heart.png';
+import profile from '../../images/profile.png';
 
 const Header = styled.header`
   height: 50px;
   width: 100%;
-  background-color: #ffb3da;
 `;
-const Nav = styled.nav`
-  position: relative;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  top: 50%;
-`;
+// const Nav = styled.nav`
+//   position: relative;
+//   -webkit-transform: translateY(-50%);
+//   -ms-transform: translateY(-50%);
+//   -moz-transform: translateY(-50%);
+//   -o-transform: translateY(-50%);
+//   transform: translateY(-50%);
+//   top: 50%;
+// `;
 
 const NavBar = () => (
   <Header>
-    <Nav>
-      <Link to="/settings">
-        <Settings />
+    <nav style={{ textAlign: 'center', padding: '20px' }}>
+      <Link to="/user">
+        <img src={profile} style={{ float: 'left', color: 'white', height: '30px', width: '30px' }} alt="profile" />
       </Link>
-      <Link to="/">
-        <Logo />
+      <Link to="/pets">
+        <span style={{ paddingleft: '20px', color: 'white', fontSize: '28px' }}> Paws.</span>
       </Link>
-      <a href="/auth/logout">
-        <button type="button">Logout</button>
-      </a>
-      <Link to="/profile">
-        <Profile />
+      <Link to="/topdogs">
+        <img src={heart} style={{ float: 'right', color: 'white', height: '30px', width: '30px' }} alt="heart" />
       </Link>
-    </Nav>
+    </nav>
   </Header>
 );
 

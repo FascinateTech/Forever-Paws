@@ -1,9 +1,16 @@
 import { Router } from 'express';
-import { postRes } from '../utils/utils';
-import { saveAnimal } from '../../../db/pets/pet';
+import { getRes, postRes, patchRes } from '../utils/utils';
+import { getAnimal, saveAnimal, updateAnimal, addLikeToPet } from '../../../db/pets/pet';
 
 const animal = Router();
 
-animal.route('/').post(postRes(saveAnimal));
+animal.patch('/addlike', patchRes(addLikeToPet));
+
+animal
+  .route('/')
+  .get(getRes({ pet: getAnimal }))
+  .post(postRes(saveAnimal));
+
+animal.patch('/:id', patchRes(updateAnimal));
 
 export default animal;

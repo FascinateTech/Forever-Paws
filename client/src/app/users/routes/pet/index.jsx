@@ -1,9 +1,10 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { get } from 'axios';
 import NavComponent from '../../navbar/index';
 import CardStack from './CardStack';
 import BottomLaunchPad from './BottomLaunchPad';
 import CardStackBottom from './CardStackBottom';
+import MatchPopup from './MatchPopup';
 
 export default class extends Component {
   constructor(props) {
@@ -12,10 +13,13 @@ export default class extends Component {
       profileQueue: [],
       currentProfileView: {},
       nextProfileView: {},
+      previousProfileView: {},
+      matchPopup: false,
     };
 
     this.nextPet = this.nextPet.bind(this);
     this.fetchPets = this.fetchPets.bind(this);
+    this.togglePopup = this.togglePopup.bind(this);
   }
 
   componentDidMount() {
@@ -23,41 +27,66 @@ export default class extends Component {
   }
 
   async fetchPets() {
-    const Console = console;
     const { profileQueue } = this.state;
     try {
-      const { data } = await get('/api/animals');
-      this.setState({
-        profileQueue: profileQueue.concat(data.animals),
+      const {
+        data: { animals },
+      } = await get('/api/animals', {
+        params: { location: localStorage.getItem('myLocationData') },
       });
+      if (!animals.length) return;
+      this.setState({
+        profileQueue: animals.concat(profileQueue),
+      });
+
       this.nextPet();
     } catch (e) {
-      Console.log(e);
+      // eslint-disable-next-line
+      console.log(e);
     }
   }
 
   nextPet() {
-    const { profileQueue, nextProfileView } = this.state;
-    if (profileQueue.length < 3) {
+    const { profileQueue, nextProfileView, currentProfileView, previousProfileView } = this.state;
+    if (profileQueue.length < 5) {
       this.fetchPets();
     } else {
       this.setState({
-        currentProfileView: nextProfileView.picture ? nextProfileView : profileQueue.splice(0, 1)[0],
-        nextProfileView: profileQueue[0],
-        profileQueue: profileQueue.slice(1),
+        previousProfileView: currentProfileView.picture ? currentProfileView : null,
+        currentProfileView: nextProfileView.picture ? nextProfileView : profileQueue.pop(),
+        nextProfileView: profileQueue.pop(),
+        profileQueue,
       });
+    }
+    // console.log('CURR', currentProfileView);
+    // console.log('PREV', previousProfileView);
+    // console.log('Next', nextProfileView);
+  }
+
+  togglePopup(close = false) {
+    const {
+      currentProfileView: { adoptable },
+    } = this.state;
+    if (close) {
+      if (adoptable) {
+        this.setState({ matchPopup: true });
+      }
+    } else {
+      this.setState({ matchPopup: false });
     }
   }
 
   render() {
-    const { currentProfileView, nextProfileView } = this.state;
+    const { currentProfileView, nextProfileView, previousProfileView, matchPopup } = this.state;
+
     return (
-      <Fragment>
+      <div style={{ 'background-image': 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: '100vh' }}>
         <NavComponent />
-        <CardStack profileQueue={currentProfileView} nextPet={this.nextPet} />
-        <CardStackBottom profileQueue={nextProfileView} />
-        <BottomLaunchPad nextPet={this.nextPet} />
-      </Fragment>
+        <CardStack profile={currentProfileView} nextPet={this.nextPet} togglePopup={this.togglePopup} />
+        <CardStackBottom profile={nextProfileView} />
+        <BottomLaunchPad nextPet={this.nextPet} id={currentProfileView.id} />
+        {matchPopup ? <MatchPopup togglePopup={this.togglePopup} previousProfileView={previousProfileView} /> : null}
+      </div>
     );
   }
 }

@@ -9,26 +9,25 @@ module.exports = {
     filename: 'server.js',
   },
   target: 'node',
-  node: {
-    __dirname: false,
-    __filename: false,
-  },
+  node: { __dirname: false, __filename: false },
+  resolve: { extensions: ['.js', '.jsx'] },
+  externals: nodeExternals(),
+  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         exclude: [/node_modules/],
-        use: [
-          {
-            loader: 'babel-loader',
-          },
-        ],
+        use: [{ loader: 'babel-loader' }],
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [{ loader: 'file-loader', options: {} }],
+      },
+      {
+        test: /manifest.json$/,
+        use: [{ loader: 'file-loader?name=manifest.json' }],
       },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
-  externals: nodeExternals(),
-  devtool: 'source-map',
 };

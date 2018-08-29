@@ -1,29 +1,33 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
+import { patch } from 'axios';
 import Profile from './Profile';
 
 /* eslint react/prop-types:0 */
 const CardStyle = styled.div`
   position: absolute;
   z-index: 2;
-  top: ${window.outerHeight * 0.1}px;
-  width: ${window.outerWidth - 20}px;
-  height: ${window.outerHeight * 0.8}px;
+  margin-left: 12%;
+  margin-right: 12%;
+  top: 12%;
+  width: 75%;
+  height: 70%;
   border-radius: 15px;
   overflow: hidden;
-  background: grey;
-  color: palevioletred;
-  border: 2px solid palevioletred;
 `;
 const ImgDiv = styled.div`
   position: relative;
+  height: ${window.outerHeight * 0.5}px;
+  border-radius: 15px;
+  background: black;
 `;
 const Img = styled.img`
-  width: auto;
-  height: ${window.outerHeight * 0.55}px;
+  max-width: auto;
+  max-height: 100%;
+  border-radius: 15px;
 `;
 
-class CardStack extends Component {
+export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -72,19 +76,24 @@ class CardStack extends Component {
   }
 
   onRelease() {
+    const {
+      profile: { id },
+      nextPet,
+      togglePopup,
+    } = this.props;
     const { xDelta } = this.state;
-    const { nextPet } = this.props;
+
     if (Math.abs(xDelta) < 150) {
       this.setState({
         xDelta: 0,
         yDelta: 0,
       });
     } else {
-      // discard card
-      this.setState({
-        renderCard: false,
-      });
-      // call next pet
+      if (xDelta > 150) {
+        patch('/api/animal/addlike', { id });
+      }
+      this.setState({ renderCard: false });
+      togglePopup(true);
       nextPet();
       // set this card back to 0,0 in componentWillReceiveProps
     }
@@ -108,9 +117,7 @@ class CardStack extends Component {
   }
 
   onMove(event) {
-    if (!this.isDragging) {
-      return;
-    }
+    if (!this.isDragging) return;
     const { left, top } = this.extractPositionDelta(event);
 
     this.setState(({ circleLeft, circleTop }) => ({
@@ -118,14 +125,6 @@ class CardStack extends Component {
       circleTop: circleTop + top,
     }));
   }
-
-  // handleMouseMove(){
-  //   const {xDelta} = this.props;
-
-  //   if(xDelta>60) {
-  //     nextPet();
-  //   }
-  // }
 
   onUp() {
     this.isDragging = false;
@@ -194,9 +193,9 @@ class CardStack extends Component {
     this.handleMouseDown(e.touches[0]);
   }
 
-  extractPositionDelta(event) {
-    const left = event.pageX;
-    const top = event.pageY;
+  extractPositionDelta(e) {
+    const left = e.pageX;
+    const top = e.pageY;
     const delta = {
       left: left - this.previousLeft,
       top: top - this.previousTop,
@@ -209,37 +208,33 @@ class CardStack extends Component {
   // sets the card css position or disables
   cardPos() {
     const { renderCard, xDelta, yDelta } = this.state;
-    if (renderCard) {
-      return `translate3d(${xDelta}px,${yDelta}px,0px)`;
-    }
-    return `translate3d(500px,500px,0px)`;
+    return renderCard ? `translate3d(${xDelta}px,${yDelta}px,0px)` : `translate3d(500px,500px,0px)`;
   }
 
   render() {
-    const { profileQueue } = this.props;
+    const { profile } = this.props;
 
     return (
-      <CardStyle
-        onMouseDown={this.handleMouseDown}
-        onTouchStart={this.handleTouchStart}
-        onPointerDown={this.onDown}
-        onPointerMove={this.onMove}
-        onPointerUp={this.onUp}
-        onPointerCancel={this.onUp}
-        onGotPointerCapture={this.onGotCapture}
-        onLostPointerCapture={this.onLostCapture}
-        style={{
-          background: 'black',
-          transform: `${this.cardPos()}`,
-        }}
-      >
-        <ImgDiv>
-          <Img alt="dog" src={profileQueue.picture} />
-        </ImgDiv>
-        <Profile profile={profileQueue} />
-      </CardStyle>
+      <Fragment>
+        <CardStyle
+          onMouseDown={this.handleMouseDown}
+          onTouchStart={this.handleTouchStart}
+          onPointerDown={this.onDown}
+          onPointerMove={this.onMove}
+          onPointerUp={this.onUp}
+          onPointerCancel={this.onUp}
+          onGotPointerCapture={this.onGotCapture}
+          onLostPointerCapture={this.onLostCapture}
+          style={{
+            transform: `${this.cardPos()}`,
+          }}
+        >
+          <ImgDiv>
+            <Img alt="dog" src={profile.picture} />
+          </ImgDiv>
+          <Profile profile={profile} />
+        </CardStyle>
+      </Fragment>
     );
   }
 }
-
-export default CardStack;
