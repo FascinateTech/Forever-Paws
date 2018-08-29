@@ -46,9 +46,9 @@ const Button = styled.button`
   border: 2px solid white;
 `;
 export default function({ previousProfileView, togglePopup }) {
-  console.log('from popup', previousProfileView);
+  // console.log('from popup', previousProfileView);
   return (
-    <PDiv onClick={togglePopup}>
+    <PDiv>
       <PDivInner>
         <h1>Its a Match!</h1>
         <br />
@@ -61,7 +61,7 @@ export default function({ previousProfileView, togglePopup }) {
             </ImgDiv>
           </div>
         ) : null}
-        <Button type="button" onClick={togglePopup}>
+        <Button type="button" onClick={togglePopup.bind(null, false)}>
           Cancel
         </Button>
       </PDivInner>

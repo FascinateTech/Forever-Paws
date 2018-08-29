@@ -47,7 +47,7 @@ export default class extends Component {
   }
 
   nextPet() {
-    const { profileQueue, nextProfileView, currentProfileView } = this.state;
+    const { profileQueue, nextProfileView, currentProfileView, previousProfileView } = this.state;
     if (profileQueue.length < 5) {
       this.fetchPets();
     } else {
@@ -58,12 +58,19 @@ export default class extends Component {
         profileQueue,
       });
     }
+    // console.log('CURR', currentProfileView);
+    // console.log('PREV', previousProfileView);
+    // console.log('Next', nextProfileView);
   }
 
-  togglePopup() {
-    const { matchPopup, previousProfileView } = this.state;
-    if (previousProfileView !== null && previousProfileView.distance !== null) {
-      this.setState({ matchPopup: !matchPopup });
+  togglePopup(close = false) {
+    const { matchPopup, previousProfileView, currentProfileView } = this.state;
+    if (close) {
+      if (currentProfileView.distance !== null) {
+        this.setState({ matchPopup: true });
+      }
+    } else {
+      this.setState({ matchPopup: false });
     }
   }
 

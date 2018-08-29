@@ -93,8 +93,8 @@ export default class extends Component {
         patch('/api/animal/addlike', { id });
       }
       this.setState({ renderCard: false });
+      togglePopup(true);
       nextPet();
-      togglePopup();
       // set this card back to 0,0 in componentWillReceiveProps
     }
   }
