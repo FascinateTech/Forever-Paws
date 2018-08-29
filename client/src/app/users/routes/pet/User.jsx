@@ -5,9 +5,8 @@ import NavComponent from '../../navbar/index';
 
 /* eslint react/prop-types:0 */
 const UserStyle = styled.div`
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 10%;
   width: 100%;
   height: 90%;
   overflow: hidden;
@@ -25,6 +24,8 @@ const Field = styled.div`
   border-color: 'black';
   border-style: solid;
   overflow: hidden;
+  margin-left: 10%;
+  margin-right: 10%;
 `;
 
 const Profile = styled.div`
@@ -51,6 +52,7 @@ export default class extends Component {
     return (
       <div style={{ 'background-image': 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: '100vh' }}>
         <NavComponent />
+        <h3 style={{ color: 'white', padding: '10%' }}>My Profile</h3>
         <UserStyle>
           <Profile>
             <p>Username</p>
@@ -65,7 +67,7 @@ export default class extends Component {
               <p>Upload Pet</p>{' '}
             </Field>
           </Link>
-          <Field style={{ top: '34%' }}>
+          <Field style={{ top: '80%' }}>
             <a href="/auth/logout">
               <p>Logout</p>{' '}
             </a>

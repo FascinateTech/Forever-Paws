@@ -35,7 +35,7 @@ export default class extends Component {
     return (
       <div style={{ backgroundImage: 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: `${70 * myPets.length}vh` }}>
         <NavComponent />
-        <ul>
+        <ul style={{ padding: '0px' }}>
           {myPets.map(pet => (
             <PetListEntry pet={pet} pickPet={this.pickPet} />
           ))}
