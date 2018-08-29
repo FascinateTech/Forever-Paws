@@ -5,8 +5,13 @@ import NavComponent from '../../navbar/index';
 
 /* eslint react/prop-types:0 */
 const UserStyle = styled.div`
+  <<<<<<<HEAD
   position: relative;
   z-index: 2;
+  =======position: absolute;
+  z-index: 2;
+  top: 10%;
+  >>>>>>>28138f8b1ca2278d1df655fff3767613bd9f0416
   width: 100%;
   height: 90%;
   overflow: hidden;
@@ -24,8 +29,11 @@ const Field = styled.div`
   border-color: 'black';
   border-style: solid;
   overflow: hidden;
+<<<<<<< HEAD
   margin-left: 10%;
   margin-right: 10%;
+=======
+>>>>>>> 28138f8b1ca2278d1df655fff3767613bd9f0416
 `;
 
 const Profile = styled.div`
