@@ -38,6 +38,7 @@ const getRes = (dbFunctions, errMessage = 'Data Not Found', status = 200, errSta
 };
 
 const postRes = (dbFunction, errMessage = 'Incorrect Format', status = 201, errStatus = 400) => async (req, res) => {
+  console.log('post req');
   try {
     await dbFunction(req.body, req.session.passport || req.session);
     res.sendStatus(status);
