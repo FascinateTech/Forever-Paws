@@ -1,5 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
+
+const CardStyle = styled.div`
+  position: relative;
+  z-index: 2;
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-top: 40px;
+  height: ${window.outerHeight * 0.5}px;
+  border-radius: 15px;
+  overflow: hidden;
+`;
 
 const ImgDiv = styled.div`
   position: relative;
@@ -15,19 +26,23 @@ const Img = styled.img`
 
 /* eslint-disable react/prop-types */
 export default ({ pet: { picture, name, age, likeCounter, breed, description, id }, pickPet, togglePopup }) => (
-  <li style={{ listStyleType: 'none', color: 'white', paddingTop: '40px' }}>
-    <ImgDiv>
-      <Img alt="dog" src={picture} />
-    </ImgDiv>
-    <span>{`${name}, ${age}, `}</span>
-    <span style={{ fontStyle: 'italic' }}>{breed}</span>
-    <br />
-    <span>{description.length > 40 ? `${description.slice(0, 40)} ...` : description}</span>
-    <br />
-    <span style={{ fontWeight: 'bold' }}>{`Like Count: ${likeCounter}`}</span>
-    <br />
-    <button type="button" onClick={() => pickPet({ picture, name, age, breed, description }, id)}>
-      Edit
-    </button>
-  </li>
+  <Fragment>
+    <CardStyle>
+      <ImgDiv>
+        <Img alt="dog" src={picture} />
+      </ImgDiv>
+    </CardStyle>
+    <li style={{ listStyleType: 'none', color: 'white', paddingTop: '20px', paddingLeft: '12%' }}>
+      <span>{`${name}, ${age}, `}</span>
+      <span style={{ fontStyle: 'italic' }}>{breed}</span>
+      <br />
+      <span>{description.length > 40 ? `${description.slice(0, 40)} ...` : description}</span>
+      <br />
+      <span style={{ fontWeight: 'bold' }}>{`Like Count: ${likeCounter}`}</span>
+      <br />
+      <button type="button" onClick={() => pickPet({ picture, name, age, breed, description }, id)}>
+        Edit
+      </button>
+    </li>
+  </Fragment>
 );

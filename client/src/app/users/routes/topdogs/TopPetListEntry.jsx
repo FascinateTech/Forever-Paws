@@ -1,5 +1,16 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
+
+const CardStyle = styled.div`
+  position: relative;
+  z-index: 2;
+  margin-left: 12%;
+  margin-right: 12%;
+  margin-top: 40px;
+  height: ${window.outerHeight * 0.5}px;
+  border-radius: 15px;
+  overflow: hidden;
+`;
 
 const ImgDiv = styled.div`
   position: relative;
@@ -15,17 +26,21 @@ const Img = styled.img`
 
 /* eslint-disable react/prop-types */
 export default ({ pet: { picture, name, age, likeCounter, breed } }) => (
-  <li style={{ listStyleType: 'none', color: 'white', paddingTop: '40px' }}>
-    <ImgDiv>
-      <Img alt="dog" src={picture} />
-    </ImgDiv>
-    <span>
-      {name}, {age}
-    </span>
-    <br />
-    <span style={{ float: 'left', 'font-style': 'italic' }}>{breed}</span>
-    <br />
-    <span style={{ fontWeight: 'bold' }}>{`Like Count: ${likeCounter}`}</span>
-    <br />
-  </li>
+  <Fragment>
+    <CardStyle>
+      <ImgDiv>
+        <Img alt="dog" src={picture} />
+      </ImgDiv>
+    </CardStyle>
+    <li style={{ listStyleType: 'none', color: 'white', paddingTop: '20px', paddingLeft: '12%' }}>
+      <span>
+        {name}, {age}
+      </span>
+      <br />
+      <span style={{ float: 'left', 'font-style': 'italic' }}>{breed}</span>
+      <br />
+      <span style={{ fontWeight: 'bold' }}>{`Like Count: ${likeCounter}`}</span>
+      <br />
+    </li>
+  </Fragment>
 );

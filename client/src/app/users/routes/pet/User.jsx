@@ -5,38 +5,37 @@ import NavComponent from '../../navbar/index';
 
 /* eslint react/prop-types:0 */
 const UserStyle = styled.div`
-  position: absolute;
-  z-index: 2;
-  top: 10%;
+  position: relative;
   width: 100%;
-  height: 90%;
-  overflow: hidden;
-  padding-top: 4%;
+  height: 60%;
   color: white;
 `;
 
 const Field = styled.div`
-  position: absolute;
-  z-index: 2;
-  top: 20%;
-  width: 100%;
-  height: 7%;
+  position: relative;
+  width: 80%;
+  height: 10%;
   border-width: 2px;
-  border-color: 'black';
+  border-color: 'white';
+  color: 'white';
   border-style: solid;
-  overflow: hidden;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-left: 2%;
+  padding-top: 4%;
 `;
 
-const Profile = styled.div`
-  position: absolute;
-  z-index: 2;
-  top: 0%;
-  width: 100%;
-  height: 20%;
+const Button = styled.div`
+  position: fixed;
+  bottom: 0;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-bottom: 10%;
+  width: 50%;
   border-width: 2px;
-  border-color: 'black';
+  border-color: white;
   border-style: solid;
-  overflow: hidden;
+  border-radius: 10px;
 `;
 
 export default class extends Component {
@@ -51,25 +50,28 @@ export default class extends Component {
     return (
       <div style={{ 'background-image': 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: '100vh' }}>
         <NavComponent />
+        <div style={{ color: 'white', padding: '10%' }}>
+          <h3>My Profile</h3>
+          <h5>Username</h5>
+        </div>
         <UserStyle>
-          <Profile>
-            <p>Username</p>
-          </Profile>
-          <Link to="/mypets">
-            <Field>
+          <Field>
+            <Link to="/mypets">
               <p>My Pets</p>{' '}
-            </Field>
-          </Link>
-          <Link to="/petupload/user">
-            <Field style={{ top: '27%' }}>
-              <p>Upload Pet</p>{' '}
-            </Field>
-          </Link>
-          <Field style={{ top: '34%' }}>
-            <a href="/auth/logout">
-              <p>Logout</p>{' '}
-            </a>
+            </Link>
           </Field>
+
+          <Field style={{ borderTop: '0px' }}>
+            <Link to="/petupload/user">
+              <p>Upload Pet</p>{' '}
+            </Link>
+          </Field>
+
+          <Button style={{}}>
+            <a href="/auth/logout">
+              <p style={{ lineHeight: '30px', textAlign: 'center' }}>Logout</p>{' '}
+            </a>
+          </Button>
         </UserStyle>
       </div>
     );

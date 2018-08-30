@@ -1,10 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Input = styled.input`
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+`;
 
 export default () => (
   <div>
-    <h5 className="card-title">Basic Information</h5>
-    <form className="form-horizontal">
-      <div className="row form-group-lg form-group">
+    <h5>Basic Information</h5>
+    <form>
+      {/* <div className="row form-group-lg form-group">
         <label className="col-sm-4 col-md-3 control-label">Email</label>
         <div className="col">
           <p className="mb-0">Sheltername@shelter.com</p>
@@ -49,7 +57,15 @@ export default () => (
         <div className="col-sm-8 offset-sm-4 offset-md-0 pl-3 col-md-3 pl-md-0">
           <input type="zip" className="form-control" id="zip" aria-describedby="zip" placeholder="zip code" />
         </div>
-      </div>
+      </div> */}
+      <label for="email">Email</label>
+      <Input type="text" id="email" name="email" />
+      <label for="org">Organization</label>
+      <Input type="text" id="org" name="org" />
+      <label for="phone">Phone</label>
+      <Input type="text" id="phone" name="phone" />
+      <label for="address">Address</label>
+      <Input type="text" id="address" name="address" />
     </form>
   </div>
 );

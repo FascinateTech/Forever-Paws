@@ -35,10 +35,13 @@ export default class extends Component {
     return (
       <div style={{ backgroundImage: 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: `${70 * myPets.length}vh` }}>
         <NavComponent />
-        <ul>
-          {myPets.map(pet => (
-            <PetListEntry pet={pet} pickPet={this.pickPet} />
-          ))}
+        <h3 style={{ color: 'white', paddingTop: '10%', paddingLeft: '10%' }}>My Pets</h3>
+        <ul style={{ padding: '0px' }}>
+          {myPets ? (
+            myPets.map(pet => <PetListEntry pet={pet} pickPet={this.pickPet} />)
+          ) : (
+            <h5 style={{ color: 'white', paddingTop: '10%', paddingLeft: '10%' }}>You have no pets :(</h5>
+          )}
         </ul>
         {popUp ? <PopupEditor pet={petToEdit} id={petId} togglePopup={this.togglePopup} /> : null}
       </div>
