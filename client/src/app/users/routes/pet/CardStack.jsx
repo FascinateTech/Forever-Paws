@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { patch } from 'axios';
+import { Motion, spring } from 'react-motion';
 import Profile from './Profile';
 
 /* eslint react/prop-types:0 */
@@ -27,6 +28,8 @@ const Img = styled.img`
   border-radius: 15px;
 `;
 
+const clamp = (n, min, max) => Math.max(Math.min(n, max), min);
+
 export default class extends Component {
   constructor(props) {
     super(props);
@@ -41,6 +44,7 @@ export default class extends Component {
       xPrev: 0,
       yPrev: 0,
       down: false,
+      springConfig: { stiffness: 1600, damping: 80 },
     };
     const { onUp, onDown, onMove } = this.props;
     this.onUp = onUp;
@@ -59,12 +63,12 @@ export default class extends Component {
     this.onLostCapture = this.onLostCapture.bind(this);
 
     this.onRelease = this.onRelease.bind(this);
-    this.cardPos = this.cardPos.bind(this);
   }
 
   componentDidMount() {
     // snaps back to place:
     window.addEventListener('touchend', this.onRelease);
+    window.addEventListener('mouseup', this.onRelease);
   }
 
   componentWillReceiveProps() {
@@ -130,13 +134,13 @@ export default class extends Component {
     this.isDragging = false;
   }
 
-  handleMouseUp() {
-    window.removeEventListener('touchmove', this.handleTouchMove);
-    window.removeEventListener('touchend', this.handleMouseUp);
-    window.removeEventListener('mousemove', this.handleMouseMoveRaf);
-    window.removeEventListener('mouseup', this.handleMouseUp);
-    const newProps = { ...this.state, down: false };
-    this.setState(this.onUp ? this.onUp(newProps) : newProps);
+  getStyle() {
+    const { springConfig, xDelta, down } = this.state;
+    const change = Math.abs(xDelta) < 150 ? spring(0) : 0;
+    return {
+      x: down ? xDelta : change,
+      rotate: down ? spring(clamp(xDelta / 15, -45, 45), springConfig) : 0,
+    };
   }
 
   handleMouseDown({ pageX, pageY }) {
@@ -205,36 +209,42 @@ export default class extends Component {
     return delta;
   }
 
-  // sets the card css position or disables
-  cardPos() {
-    const { renderCard, xDelta, yDelta } = this.state;
-    return renderCard ? `translate3d(${xDelta}px,${yDelta}px,0px)` : `translate3d(500px,500px,0px)`;
+  handleMouseUp() {
+    window.removeEventListener('touchmove', this.handleTouchMove);
+    window.removeEventListener('touchend', this.handleMouseUp);
+    window.removeEventListener('mousemove', this.handleMouseMoveRaf);
+    window.removeEventListener('mouseup', this.handleMouseUp);
+    const newProps = { ...this.state, down: false };
+    this.setState(this.onUp ? this.onUp() : newProps);
   }
 
   render() {
     const { profile } = this.props;
 
     return (
-      <Fragment>
-        <CardStyle
-          onMouseDown={this.handleMouseDown}
-          onTouchStart={this.handleTouchStart}
-          onPointerDown={this.onDown}
-          onPointerMove={this.onMove}
-          onPointerUp={this.onUp}
-          onPointerCancel={this.onUp}
-          onGotPointerCapture={this.onGotCapture}
-          onLostPointerCapture={this.onLostCapture}
-          style={{
-            transform: `${this.cardPos()}`,
-          }}
-        >
-          <ImgDiv>
-            <Img alt="dog" src={profile.picture} />
-          </ImgDiv>
-          <Profile profile={profile} />
-        </CardStyle>
-      </Fragment>
+      <Motion style={this.getStyle()}>
+        {({ x, rotate, opacity }) => (
+          <CardStyle
+            onMouseDown={this.handleMouseDown}
+            onTouchStart={this.handleTouchStart}
+            onPointerDown={this.onDown}
+            onPointerMove={this.onMove}
+            onPointerUp={this.onUp}
+            onPointerCancel={this.onUp}
+            onGotPointerCapture={this.onGotCapture}
+            onLostPointerCapture={this.onLostCapture}
+            style={{
+              opacity,
+              transform: `translate3d(${x}px, 0, 0) rotate(${rotate}deg)`,
+            }}
+          >
+            <ImgDiv>
+              <Img alt="dog" src={profile.picture} draggable={false} />
+            </ImgDiv>
+            <Profile profile={profile} />
+          </CardStyle>
+        )}
+      </Motion>
     );
   }
 }
