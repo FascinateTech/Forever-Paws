@@ -33,7 +33,7 @@
       "type": "image/png"
     }
   ],
-  "start_url": "./template.js",
+  "start_url": "foreverpaws.herokuapp.com/",
   "display": "standalone",
   "theme_color": "#ce5dd8",
   "background_color": "#ff9999",
