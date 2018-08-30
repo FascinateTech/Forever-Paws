@@ -49,9 +49,9 @@ export default class extends Component {
     this.setState({ [name]: value });
   }
 
-  async handleLogin() {
+  handleLogin() {
     try {
-      await post('/auth/shelter/login', this.state);
+      post('/auth/shelter/login', this.state);
     } catch (e) {
       // eslint-disable-next-line
       console.log(e);
@@ -137,13 +137,13 @@ export default class extends Component {
               </div>
             </div> */}
           <label for="site">Website</label>
-          <Input type="text" id="site" name="site" placeholder="website" onChange={this.onChange} />
+          <Input type="text" id="site" name="website" placeholder="website" value={website} onChange={this.onChange} />
           <label for="pw">Password</label>
-          <Input type="text" id="pw" name="pw" placeholder="Password" onChange={this.onChange} />
+          <Input type="text" id="pw" name="password" placeholder="Password" value={password} onChange={this.onChange} />
           <div style={{ flex: 'row' }}>
-            <Link to="/account">
-              <button style={{ marginBottom: '20px' }}>Login</button>
-            </Link>
+            <button style={{ marginBottom: '20px' }} type="button" onClick={this.handleLogin}>
+              Login
+            </button>
             <Link to="/signup" style={{ float: 'right' }}>
               <button type="button">Signup</button>
             </Link>

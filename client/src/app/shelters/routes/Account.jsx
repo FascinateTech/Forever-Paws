@@ -83,7 +83,7 @@ export default class extends Component {
               </a>
             </Li>
             <Li>
-              <a href="/">Logout</a>
+              <a href="/auth/logout">Logout</a>
             </Li>
           </Ul>
         </div>
