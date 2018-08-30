@@ -8,7 +8,7 @@ db.knex.schema.hasTable('users').then(
         user.increments('id').primary();
         user.boolean('shelter').defaultTo(false);
         user.string('username');
-        user.string('password');
+        user.string('password', 60);
         user.string('googleId').unique();
         user.string('firstName');
         user.string('facebookId').unique();

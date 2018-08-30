@@ -1,32 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 
-export default ({ myPets, deletePet }) => (
-  <div className="container">
-    <div className="row">
-      <div className="col-sm-12 my-4">
-        <h2 className="mb-3">Pet List</h2>
-        <table className="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Breed</th>
-              <th scope="col">ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* {myPets.map(({ name, breed, id }) => ( */}
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Retriever</td>
-              <td>23892</td>
-              <button onClick={() => deletePet(id)} />
-            </tr>
-            {/* ))} */}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+const Td = styled.th`
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+`;
+
+/* eslint-disable react/prop-types */
+export default ({ pet: { name, breed, id } }) => (
+  <tr>
+    <th scope="row" />
+    <Td>{id}</Td>
+    <Td>{name}</Td>
+    <Td>{breed}</Td>
+  </tr>
 );

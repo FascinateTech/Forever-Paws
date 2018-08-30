@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import Nav from '../navbar/index';
 
 export default class extends Component {
@@ -55,9 +56,11 @@ export default class extends Component {
                     </label>
                     <textarea className="form-control" id="exampleFormControlTextarea1" rows="3" />
                   </div>
-                  <button type="button" className="btn btn-primary btn-lg btn-block">
-                    Add pet
-                  </button>
+                  <Link to="/petupload">
+                    <button type="button" className="btn btn-primary btn-lg btn-block">
+                      Add pet
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>

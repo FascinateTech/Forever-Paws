@@ -1,6 +1,29 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Password from './PasswordComponent';
 import Info from './InfoComponent';
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 20%;
+  margin-right: 20%;
+`;
+
+const Ul = styled.ul`
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: white;
+`;
+
+const Li = styled.li`
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+`;
 
 export default class extends Component {
   constructor(props) {
@@ -21,10 +44,9 @@ export default class extends Component {
   render() {
     const { view } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12 col-md-3 my-md-5 my-sm-1">
-            <ul className="nav flex-column nav-pills">
+      <Container>
+        <div style={{ flex: '3', marginTop: '5%' }}>
+          {/* <ul className="nav flex-column nav-pills">
               <li className="nav-item">
                 <a
                   className={view === 'info' ? 'nav-link active' : 'nav-link'}
@@ -48,15 +70,27 @@ export default class extends Component {
                   Logout
                 </a>
               </li>
-            </ul>
-          </div>
-          <div className="col">
-            <div className="card mt-md-5 mt-sm-1">
-              <div className="card-body">{this.renderView()}</div>
-            </div>
-          </div>
+            </ul> */}
+          <Ul>
+            <Li>
+              <a href="#" onClick={() => this.changeView('info')}>
+                Edit View
+              </a>
+            </Li>
+            <Li>
+              <a href="#" onClick={() => this.changeView('password')}>
+                Password
+              </a>
+            </Li>
+            <Li>
+              <a href="/">Logout</a>
+            </Li>
+          </Ul>
         </div>
-      </div>
+        <div style={{ flex: '9', marginTop: '5%' }}>
+          <div>{this.renderView()}</div>
+        </div>
+      </Container>
     );
   }
 }

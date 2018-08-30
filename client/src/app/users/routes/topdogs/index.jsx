@@ -21,6 +21,7 @@ export default class extends Component {
     return (
       <div style={{ 'background-image': 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: '325vh' }}>
         <NavComponent />
+        <h3 style={{ color: 'white', paddingTop: '10%', paddingLeft: '10%' }}>Top Dogs</h3>
         <ul style={{ padding: '0px' }}>
           {dailyTop.map(pet => (
             <TopPetListEntry pet={pet} />
