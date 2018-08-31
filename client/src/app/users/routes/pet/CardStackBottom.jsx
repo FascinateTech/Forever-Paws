@@ -18,6 +18,9 @@ const ImgDiv2 = styled.div`
   height: ${window.outerHeight * 0.5}px;
   border-radius: 15px;
   background: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 `;
 const Img2 = styled.img`
   max-width: auto;
@@ -27,8 +30,6 @@ const Img2 = styled.img`
 
 export default ({ profile: { picture } }) => (
   <CardStyle2>
-    <ImgDiv2>
-      <Img2 alt="dog" src={picture} />
-    </ImgDiv2>
+    <ImgDiv2 style={{ backgroundImage: `url(${picture})` }} />
   </CardStyle2>
 );

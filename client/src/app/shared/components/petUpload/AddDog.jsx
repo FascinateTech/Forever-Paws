@@ -39,6 +39,20 @@ const Button = styled.button`
   background: transparent;
   border: 0;
 `;
+
+const Input = styled.input`
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid white;
+  background-color: transparent;
+  margin-bottom: 20px;
+  color: white;
+  &::-webkit-input-placeholder {
+    color: white;
+  }
+`;
+
 let picture;
 console.log(picture);
 function initializeMedia() {
@@ -130,6 +144,7 @@ export default class extends Component {
       description: null,
       age: null,
       photos: [],
+      submit: false,
     };
 
     this.onChange = this.onChange.bind(this);
@@ -194,7 +209,17 @@ export default class extends Component {
       picture: photosData[0].url,
     };
     post('/api/animal', submission)
-      .then(() => console.log('submitted!')) // eslint-disable-line
+      .then(
+        () => console.log('submitted!'),
+        (this.setState = {
+          name: null,
+          breed: null,
+          description: null,
+          age: null,
+          photos: [],
+          sumbit: true,
+        })
+      ) // eslint-disable-line
       .catch(err => console.log(err)); // eslint-disable-line
   }
 
@@ -229,15 +254,16 @@ export default class extends Component {
     return (
       <div className="dropzone">
         {/* https://www.npmjs.com/package/react-dropzone */}
+
         <Dropzone onDrop={this.onDrop} multiple accept="image/jpeg, image/png" maxSize={5242880}>
-          <p>Add some pet photos dawg!</p>
+          <p>Click here to capture or upload a photo!</p>
         </Dropzone>
       </div>
     );
   }
 
   render() {
-    const { name, breed, description, age, photos } = this.state;
+    const { name, breed, description, age, photos, submit } = this.state;
     const {
       match: {
         params: { type },
@@ -247,33 +273,33 @@ export default class extends Component {
     return (
       <div style={{ 'background-image': 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: '100vh' }}>
         {type === 'user' ? <UserNav /> : <ShelterNav />}
-        Upload Pet
-        <div>
-          Whats your pets name?
-          <input type="text" id="name" value={name} onChange={this.onChange} />
+        <h3 style={{ color: 'white', padding: '20px' }}>Upload Pet</h3>
+        <div style={{ marginLeft: '5%', marginRight: '5%', marginBottom: '5%' }}>
+          <div>
+            <Input type="text" id="name" placeholder="Name" value={name} onChange={this.onChange} />
+          </div>
+          <div>
+            <Input type="text" id="breed" placeholder="Breed" value={breed} onChange={this.onChange} />
+          </div>
+          <div>
+            <Input type="text" id="description" placeholder="Caption" value={description} onChange={this.onChange} />
+          </div>
+          <div>
+            <Input type="text" id="age" value={age} placeholder="Age" onChange={this.onChange} />
+          </div>
+          <div style={{ color: 'white', marginBottom: '20px' }}>
+            {submit ? `Submitted!` : `${photos.length} File(s) Uploaded`}
+          </div>
+          <SubmitButton onClick={this.onsubmit}>submit</SubmitButton>
         </div>
-        <div>
-          Whats your pets breed?
-          <input type="text" id="breed" value={breed} onChange={this.onChange} />
-        </div>
-        <div>
-          Whats your pets description?
-          <input type="text" id="description" value={description} onChange={this.onChange} />
-        </div>
-        <div>
-          Whats your pets age?
-          <input type="text" id="age" value={age} onChange={this.onChange} />
-        </div>
-        <div>{photos.length} File(s) Uploaded</div>
-        <SubmitButton onClick={this.onsubmit}>submit</SubmitButton>
-        <SubmitButton className="player" onClick={initializeMedia}>
+        {/* <SubmitButton className="player" onClick={initializeMedia}>
           Open Camera
         </SubmitButton>
         <SubmitButton id="pictureButton" onClick={saveImg}>
           Capture
         </SubmitButton>
-        <Video id="player" autoPlay muted />
-        <canvas id="canvas" width="320px" height="240px" />
+        <Video id="player" autoPlay muted /> */}
+        {/* <canvas id="canvas" width="320px" height="240px" /> */}
         <div>{this.picOrUpload()}</div>
       </div>
     );

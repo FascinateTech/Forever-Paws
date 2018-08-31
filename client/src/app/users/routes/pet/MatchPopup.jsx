@@ -6,9 +6,13 @@ import Profile from './Profile';
 
 const ImgDiv = styled.div`
   position: relative;
-  height: ${window.outerHeight * 0.5}px;
+  height: ${window.outerHeight * 0.3}px;
   border-radius: 15px;
   background: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  margin-top: 15px;
 `;
 const Img = styled.img`
   max-width: auto;
@@ -28,14 +32,15 @@ const PDiv = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
 `;
 const PDivInner = styled.div`
-  position: absolute;
-  width: 75%;
-  height: 70%;
-  left: 5%;
-  top: 5%;
+  position: relative;
+  width: 350px;
+  height: 550px;
   margin: auto;
-  background: black;
-  color: white;
+  margin-top: 75px;
+  padding: 30px;
+  border-radius: 10px;
+  background: white;
+  color: green;
 `;
 const Button = styled.button`
   position: 'relative';
@@ -44,8 +49,36 @@ const Button = styled.button`
   border-radius: 3px;
   padding: 0.25em 1em;
   background: transparent;
-  color: white;
-  border: 2px solid white;
+  color: red;
+  border: 2px solid red;
+`;
+
+const ProfileStyle = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-top: 4%;
+  color: green;
+  margin-bottom: 15px;
+`;
+
+const P = styled.p`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin: 0;
+  font-weight: 100;
+`;
+const Span = styled.span`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  margin: 0;
+  font-weight: 100;
+`;
+const P1 = styled.p`
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 100;
+  margin: 0;
 `;
 
 export default function({ previousProfileView, togglePopup }) {
@@ -53,21 +86,27 @@ export default function({ previousProfileView, togglePopup }) {
     <PDiv onClick={() => togglePopup(false)}>
       <PDivInner onClick={e => e.stopPropagation()}>
         <h1>Its a Match!</h1>
-        <br />
-        <h2>This pet is availble for adoption:</h2>
+        <h5>This pet is availble for adoption:</h5>
         {previousProfileView ? (
           <div>
-            <Profile profile={previousProfileView} />
-            <br />
             {Math.floor(previousProfileView.distance * 0.000621371)} miles away
             <br />
             <a href={`https://${previousProfileView.website}`} rel="noopener noreferrer" target="_blank">
               Shelter
               {`'`}s website
             </a>
-            <ImgDiv>
-              <Img alt="dog" src={previousProfileView.picture} />
-            </ImgDiv>
+            <ImgDiv style={{ backgroundImage: `url(${previousProfileView.picture})` }} />
+            {/* <Img alt="dog" src={previousProfileView.picture} /> */}
+            {/* </ImgDiv> */}
+            <ProfileStyle>
+              <P1>
+                {previousProfileView.name}, {previousProfileView.age}
+              </P1>
+              <Span style={{ float: 'left', 'font-style': 'italic' }}>{previousProfileView.breed}</Span>{' '}
+              {/* <Span style={{ float: 'right' }}>zip: {location} </Span> */}
+              <br />
+              <P>{`"${previousProfileView.description}"`}</P>
+            </ProfileStyle>
           </div>
         ) : null}
         <Button type="button" onClick={() => togglePopup(false)}>

@@ -10,6 +10,21 @@ export default html =>
         <title>Forever Paws</title>
         <link rel="manifest" href="/manifest.json">
         <link rel="paw-touch-icon" href="../../src/Images/icons/paw-48.png" sizes="48x48">
+        <style>
+        html, body {
+          max-width: 100%;
+          overflow-x: hidden;
+        },
+        .place::placeholder {
+          width: 100%;
+          box-sizing: border-box;
+          border: none;
+          border-bottom: 2px solid white;
+          background-color: transparent;
+          margin-bottom: 20px;
+          color: white;
+        }
+      </style>
     </head>
     <body>
         <div id="app">${html}</div>
