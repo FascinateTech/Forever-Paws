@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     window.location.hostname === '[::1]' ||
@@ -8,7 +9,8 @@ function registerValidSW(swUrl) {
   console.log('registerValidSW');
   navigator.serviceWorker
     .register(swUrl)
-    .then(registration => {
+    .then(r => {
+      const registration = r;
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {

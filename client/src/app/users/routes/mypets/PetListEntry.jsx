@@ -31,13 +31,7 @@ const Img = styled.img`
 export default ({ pet: { picture, name, age, likeCounter, breed, description, id }, pickPet, togglePopup }) => (
   <Fragment>
     <CardStyle>
-<<<<<<< HEAD
       <ImgDiv style={{ backgroundImage: `url(${picture})` }} />
-=======
-      <ImgDiv>
-        <Img alt="dog" src={picture} />
-      </ImgDiv>
->>>>>>> 65df241fee95f19f75b2fa40bc3b88a2133740b7
     </CardStyle>
     <li style={{ listStyleType: 'none', color: 'white', paddingTop: '20px', paddingLeft: '12%' }}>
       <span>{`${name}, ${age}, `}</span>
