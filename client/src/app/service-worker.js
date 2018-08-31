@@ -1,8 +1,7 @@
 const doCache = false;
 
 const CACHE_NAME = 'my-pwa-cache-v1';
-
-console.log('hi');
+console.log('hello');
 // eslint-disable-next-line
 self.addEventListener('activate', event => {
   const cacheWhitelist = [CACHE_NAME];
