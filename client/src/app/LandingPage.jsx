@@ -6,6 +6,7 @@ import bg from './images/bg.jpg';
 import tree from './images/pawtree.png';
 import goog from './images/goog.png';
 import fb from './images/fb.png';
+import mbn from './images/mubeen.png';
 
 const sampleData = [
   {
@@ -67,7 +68,7 @@ const styles = {
   main: {
     background: `url(${bg}) no-repeat`,
     backgroundSize: '100% 850px',
-    paddingBottom: '1000px',
+    paddingBottom: '30px',
   },
 
   tree: {
@@ -98,7 +99,7 @@ const styles = {
 const LandingPage = () => (
   <div>
     <div style={styles.main}>
-      <nav className="navbar navbar-light mx-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0)', padding: '28px' }}>
+      {/* <nav className="navbar navbar-light mx-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0)', padding: '28px' }}>
         <a className="navbar-brand" style={{ color: '#fff', fontWeight: 'bold', fontSize: '32px' }} href="/">
           Paws.
         </a>
@@ -116,10 +117,23 @@ const LandingPage = () => (
             <Button type="button">Shelters</Button>
           </Link>
         </div>
+      </nav> */}
+      <nav style={{ backgroundColor: 'rgba(0, 0, 0, 0)', padding: '28px' }}>
+        <a style={{ color: '#fff', fontWeight: 'bold', fontSize: '32px' }} href="/">
+          Paws.
+        </a>
+        <div style={{ float: 'right' }}>
+          <a href="/auth/google">
+            <img src={goog} style={{ marginRight: '30px', color: 'white', height: '40px' }} alt="google" />
+          </a>
+          <a href="/auth/facebook">
+            <img src={fb} style={{ marginRight: '30px', color: 'white', height: '40px' }} alt="fb" />
+          </a>
+        </div>
       </nav>
       <div className="container" style={{ maxWidth: '80%' }}>
         <div className="row align-items-center">
-          <div className="col pb-5  mb-5 col-12-md">
+          <div className="col-lg-6 pb-5  mb-5 col-md-12">
             <h1 style={styles.title}>Share your pets</h1>
             <h1 style={styles.title}>Help others find a home.</h1>
             <p style={styles.p} className="mt-2">
@@ -131,8 +145,45 @@ const LandingPage = () => (
             Sign up
           </button> */}
           </div>
-          <div className="hidden-md-down visible col-6-lg align-items-center">
+          <div className="col-lg-6 hidden-md-down  align-items-center">
             <img src={tree} style={styles.tree} alt="loading" />
+          </div>
+        </div>
+        <div className="row align-items-center mt-5">
+          <h1 className="col display-3 text-center mt-5">Meet the team!</h1>
+        </div>
+        <div className="row align-items-center my-5">
+          <div className="col-md-3 col-sm-12 text-center">
+            <div className="card" style={{ border: '0px' }}>
+              <div className="card-body">
+                <img className="mb-4" src={mbn} style={{ height: '125px', width: '125px' }} alt="profile" />
+                <h5>Eric Dai</h5>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3 col-sm-12 text-center">
+            <div className="card" style={{ border: '0px' }}>
+              <div className="card-body">
+                <img className="mb-4" src={mbn} style={{ height: '125px', width: '125px' }} alt="profile" />
+                <h5>Max Berkowitz</h5>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3 col-sm-12 text-center">
+            <div className="card" style={{ border: '0px' }}>
+              <div className="card-body">
+                <img className="mb-4" src={mbn} style={{ height: '125px', width: '125px' }} alt="profile" />
+                <h5>Derrek Tran</h5>
+              </div>
+            </div>
+          </div>
+          <div className="col-md-3 col-sm-12 text-center">
+            <div className="card" style={{ border: '0px' }}>
+              <div className="card-body">
+                <img className="mb-4" src={mbn} style={{ height: '125x', width: '125px' }} alt="profile" />
+                <h5>Mubeen Ali</h5>
+              </div>
+            </div>
           </div>
         </div>
       </div>

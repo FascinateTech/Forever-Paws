@@ -21,6 +21,9 @@ const ImgDiv = styled.div`
   height: ${window.outerHeight * 0.5}px;
   border-radius: 15px;
   background: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 `;
 const Img = styled.img`
   max-width: auto;
@@ -238,8 +241,8 @@ export default class extends Component {
               transform: `translate3d(${x}px, 0, 0) rotate(${rotate}deg)`,
             }}
           >
-            <ImgDiv>
-              <Img alt="dog" src={profile.picture} draggable={false} />
+            <ImgDiv style={{ backgroundImage: `url(${profile.picture})` }}>
+              {/* <Img alt="dog" src={profile.picture} draggable={false} /> */}
             </ImgDiv>
             <Profile profile={profile} />
           </CardStyle>

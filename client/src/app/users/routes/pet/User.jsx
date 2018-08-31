@@ -15,14 +15,12 @@ const Field = styled.div`
   position: relative;
   width: 80%;
   height: 10%;
-  border-width: 2px;
-  border-color: 'white';
+  border-bottom: 1px solid white;
   color: 'white';
-  border-style: solid;
   margin-left: 10%;
   margin-right: 10%;
-  padding-left: 2%;
-  padding-top: 4%;
+  display: flex;
+  align-items: center;
 `;
 
 const Button = styled.div`
@@ -36,6 +34,11 @@ const Button = styled.div`
   border-color: white;
   border-style: solid;
   border-radius: 10px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 `;
 
 export default class extends Component {
@@ -50,26 +53,26 @@ export default class extends Component {
     return (
       <div style={{ 'background-image': 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: '100vh' }}>
         <NavComponent />
-        <div style={{ color: 'white', padding: '10%' }}>
+        <div style={{ color: 'white', padding: '30px' }}>
           <h3>My Profile</h3>
           <h5>Username</h5>
         </div>
         <UserStyle>
           <Field>
-            <Link to="/mypets">
-              <p>My Pets</p>{' '}
+            <Link style={{ color: 'white', paddingLeft: '4%' }} to="/mypets">
+              <span>My Pets</span>{' '}
             </Link>
           </Field>
 
-          <Field style={{ borderTop: '0px' }}>
-            <Link to="/petupload/user">
-              <p>Upload Pet</p>{' '}
+          <Field style={{ borderBottom: '0px' }}>
+            <Link style={{ color: 'white', paddingLeft: '4%' }} to="/petupload/user">
+              <span>Upload Pet</span>{' '}
             </Link>
           </Field>
 
           <Button style={{}}>
             <a href="/auth/logout">
-              <p style={{ lineHeight: '30px', textAlign: 'center' }}>Logout</p>{' '}
+              <span style={{ textAlign: 'center', color: 'purple', fontStyle: 'bold' }}>Logout</span>{' '}
             </a>
           </Button>
         </UserStyle>

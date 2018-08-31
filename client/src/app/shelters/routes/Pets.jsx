@@ -58,14 +58,14 @@ export default class extends Component {
                 </tr>
               </thead>
               <tbody>
-                {/* {myPets.map(pet => (
-                    <PetListEntry pet={pet} />
-                  ))} */}
-                <tr>
+                {myPets.map(pet => (
+                  <PetListEntry pet={pet} />
+                ))}
+                {/* <tr>
                   <Td>id</Td>
                   <Td>name</Td>
                   <Td>breed</Td>
-                </tr>
+                </tr> */}
               </tbody>
             </Table>
           </div>

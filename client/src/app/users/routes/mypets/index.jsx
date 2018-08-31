@@ -33,7 +33,7 @@ export default class extends Component {
   render() {
     const { myPets, popUp, petToEdit, petId } = this.state;
     return (
-      <div style={{ backgroundImage: 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: `${70 * myPets.length}vh` }}>
+      <div style={{ backgroundImage: 'linear-gradient(-155deg, #6868fd, #fa85a1)', height: `${72 * myPets.length}vh` }}>
         <NavComponent />
         <h3 style={{ color: 'white', paddingTop: '10%', paddingLeft: '10%' }}>My Pets</h3>
         <ul style={{ padding: '0px' }}>

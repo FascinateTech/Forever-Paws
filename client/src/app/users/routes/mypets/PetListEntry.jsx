@@ -17,6 +17,9 @@ const ImgDiv = styled.div`
   height: ${window.outerHeight * 0.5}px;
   border-radius: 15px;
   background: black;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 `;
 const Img = styled.img`
   max-width: auto;
@@ -28,9 +31,7 @@ const Img = styled.img`
 export default ({ pet: { picture, name, age, likeCounter, breed, description, id }, pickPet, togglePopup }) => (
   <Fragment>
     <CardStyle>
-      <ImgDiv>
-        <Img alt="dog" src={picture} />
-      </ImgDiv>
+      <ImgDiv style={{ backgroundImage: `url(${picture})` }} />
     </CardStyle>
     <li style={{ listStyleType: 'none', color: 'white', paddingTop: '20px', paddingLeft: '12%' }}>
       <span>{`${name}, ${age}, `}</span>

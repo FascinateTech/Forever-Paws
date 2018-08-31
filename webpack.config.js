@@ -39,6 +39,7 @@ module.exports = {
         if (message.indexOf('Skipping static resource') === 0) {
           return;
         }
+        // eslint-disable-next-line
         console.log(message);
       },
       minify: true,
