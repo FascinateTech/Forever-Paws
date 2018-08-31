@@ -10,6 +10,10 @@ const Td = styled.th`
 /* eslint-disable react/prop-types */
 export default ({ pet: { name, breed, id } }) => (
   <tr>
+<<<<<<< HEAD
+=======
+    <th scope="row" />
+>>>>>>> 65df241fee95f19f75b2fa40bc3b88a2133740b7
     <Td>{id}</Td>
     <Td>{name}</Td>
     <Td>{breed}</Td>

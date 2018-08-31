@@ -58,6 +58,7 @@ export default class extends Component {
                 </tr>
               </thead>
               <tbody>
+<<<<<<< HEAD
                 {myPets.map(pet => (
                   <PetListEntry pet={pet} />
                 ))}
@@ -66,6 +67,16 @@ export default class extends Component {
                   <Td>name</Td>
                   <Td>breed</Td>
                 </tr> */}
+=======
+                {/* {myPets.map(pet => (
+                    <PetListEntry pet={pet} />
+                  ))} */}
+                <tr>
+                  <Td>id</Td>
+                  <Td>name</Td>
+                  <Td>breed</Td>
+                </tr>
+>>>>>>> 65df241fee95f19f75b2fa40bc3b88a2133740b7
               </tbody>
             </Table>
           </div>

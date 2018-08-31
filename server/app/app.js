@@ -32,6 +32,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/dist', express.static(`${__dirname}/../../client/dist/`));
 
+app.use('/manifest', express.static(`${__dirname}/../../client/src/app/manifest.json`));
+
+app.use('/service-worker.js', express.static(`${__dirname}/../../client/src/app/service-worker.js`));
+
 app.use('/auth', auth);
 
 app.use('/api', checkUser, api);
