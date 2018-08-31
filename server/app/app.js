@@ -34,11 +34,11 @@ app.use('/dist', express.static(`${__dirname}/../../client/dist/`));
 
 app.use('/manifest', express.static(`${__dirname}/../../client/src/app/manifest.json`));
 
+app.use('/service-worker', express.static(`${__dirname}/../../client/src/app/service-worker.js`));
+
 app.use('/auth', auth);
 
 app.use('/api', checkUser, api);
-
-app.use('/registerServiceWorker', express.static(`${__dirname}/../../client/src/app/registerServiceWorker.js`));
 
 app.get('/loginsuccess', (req, res) => res.redirect('/location'));
 

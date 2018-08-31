@@ -5,9 +5,10 @@ const isLocalhost = Boolean(
     // 127.0.0.1/8 is considered localhost for IPv4.
     window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
-console.log('we made it into register!');
+console.log('we made it register!');
 
 function registerValidSW(swUrl) {
+  console.log('registerValidSW');
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -37,6 +38,7 @@ function registerValidSW(swUrl) {
 }
 
 function checkValidServiceWorker(swUrl) {
+  console.log('checkValidServiceWorker');
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
     .then(response => {
@@ -59,7 +61,11 @@ function checkValidServiceWorker(swUrl) {
 }
 
 export default function register() {
+  console.log('register');
+  console.log(navigator);
+  console.log(process.env);
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    console.log('hi');
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
     if (publicUrl.origin !== window.location.origin) {
@@ -70,7 +76,7 @@ export default function register() {
     }
 
     window.addEventListener('load', () => {
-      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+      const swUrl = `${process.env.PUBLIC_URL}/service-worker`;
 
       if (!isLocalhost) {
         // Is not local host. Just register service worker
