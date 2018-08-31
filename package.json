@@ -54,6 +54,7 @@
     "styled-navbar-component": "^2.0.0",
     "styled-system": "^3.0.2",
     "sw-precache-webpack-plugin": "^0.11.5",
+    "webpack-manifest-plugin": "^2.0.3",
     "webpack-node-externals": "^1.7.2"
   },
   "devDependencies": {
