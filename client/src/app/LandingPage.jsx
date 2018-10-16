@@ -7,6 +7,9 @@ import tree from './images/pawtree.png';
 import goog from './images/goog.png';
 import fb from './images/fb.png';
 import mbn from './images/mubeen.png';
+import eric from './images/eric.png';
+import derrek from './images/derrek.png';
+import max from './images/max.png';
 
 const sampleData = [
   {
@@ -156,7 +159,7 @@ const LandingPage = () => (
           <div className="col-md-3 col-sm-12 text-center">
             <div className="card" style={{ border: '0px' }}>
               <div className="card-body">
-                <img className="mb-4" src={mbn} style={{ height: '125px', width: '125px' }} alt="profile" />
+                <img className="mb-4" src={eric} style={{ height: '125px', width: '125px' }} alt="profile" />
                 <h5>Eric Dai</h5>
               </div>
             </div>
@@ -164,7 +167,7 @@ const LandingPage = () => (
           <div className="col-md-3 col-sm-12 text-center">
             <div className="card" style={{ border: '0px' }}>
               <div className="card-body">
-                <img className="mb-4" src={mbn} style={{ height: '125px', width: '125px' }} alt="profile" />
+                <img className="mb-4" src={max} style={{ height: '125px', width: '125px' }} alt="profile" />
                 <h5>Max Berkowitz</h5>
               </div>
             </div>
@@ -172,7 +175,7 @@ const LandingPage = () => (
           <div className="col-md-3 col-sm-12 text-center">
             <div className="card" style={{ border: '0px' }}>
               <div className="card-body">
-                <img className="mb-4" src={mbn} style={{ height: '125px', width: '125px' }} alt="profile" />
+                <img className="mb-4" src={derrek} style={{ height: '125px', width: '125px' }} alt="profile" />
                 <h5>Derrek Tran</h5>
               </div>
             </div>
