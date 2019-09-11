@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/FacinateTech/Forever-Paws#readme",
   "dependencies": {
-    "@types/react-motion": "0.0.27",
+    "@types/react-motion": "0.0.29",
     "attr-accept": "^1.1.3",
     "axios": "^0.18.0",
     "babel-plugin-transform-decorators-legacy": "^1.3.5",
