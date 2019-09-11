@@ -48,7 +48,7 @@
     "react-router-dom": "^4.3.1",
     "react-spring": "^5.6.6",
     "react-with-gesture": "^1.0.10",
-    "styled-components": "^3.4.2",
+    "styled-components": "^3.4.10",
     "styled-container-component": "^2.0.0",
     "styled-nav-component": "^2.0.0",
     "styled-navbar-component": "^2.0.0",
